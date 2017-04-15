@@ -43,8 +43,6 @@ $.getJSON('assets/data.json', function(data) {
         });
         seriesData.push(tmp);
     });
-    console.log(minDate);
-    console.log(maxDate);
 
     // THE CHART
     Highcharts.ganttChart('container', {
@@ -56,51 +54,7 @@ $.getJSON('assets/data.json', function(data) {
             min: minDate,
             max: maxDate
         },
-
         series: seriesData
     });
 
 });
-
-seriesData = [
-   {
-       name: 'Persistent Universe Combat',
-       data: [
-               {
-                   taskName: 'Moons',
-                   id: 'moons',
-                   start: convert('3.4.2017'),
-                   end: convert('7.4.2017')
-               },
-               {
-                   taskName: 'Surface Outposts',
-                   id: 'surface_outposts',
-                   start: convert('3.4.2017'),
-                   end: convert('2.6.2017')
-               },
-               {
-                   taskName: 'Mission Givers',
-                   id: 'mission_givers',
-                   start: convert('17.4.2017'),
-                   end: convert('12.5.2017')
-               }
-           ]
-   },
-   {
-       name: 'Gameplay',
-       data: [
-           {
-               taskName: 'Pick Up & Carry',
-               id: 'pick_up_carry',
-               start: convert('3.4.2017'),
-               end: convert('24.5.2017')
-           },
-           {
-               taskName: 'Repair',
-               id: 'repair',
-               start: convert('29.5.2017'),
-               end: convert('2.6.2017')
-           }
-       ]
-   }
-];
