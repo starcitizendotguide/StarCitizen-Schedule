@@ -3,9 +3,10 @@ function convert(date) {
     return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), 1).getTime();
 }
 
-drawSchedule('3.0-schedule');
+//--- Draw Default
+drawSchedule('3.0-schedule', '3.0 Schedule');
 
-function drawSchedule(dataSet) {
+function drawSchedule(dataSet, title) {
 
     $.getJSON('assets/data/' + dataSet + '.json', function(data) {
 
@@ -16,6 +17,8 @@ function drawSchedule(dataSet) {
 
         //--- Parse the Data
         $.each(data, function(key, value) {
+
+            //--- Data Building for our default Gantt Diagramm
             var tmp = {
                 'name': value.title,
                 'data': []
@@ -42,19 +45,21 @@ function drawSchedule(dataSet) {
                         id: v.title,
                         start: convert(v.start),
                         end: convert(v.end),
-                        parent: value.title,
-                        dependency: dependencyId
+                        parent: value.title
+                        //dependency: dependencyId,
                     });
-                    //dependencyId = v.title;
+                    dependencyId = v.title;
                 });
             });
+
+            //--- Push Final Data
             seriesData.push(tmp);
+
         });
 
-        // THE CHART
         Highcharts.ganttChart('container', {
             title: {
-                text: 'Star Citizen - Schedule 3.0'
+                text: title
             },
             xAxis: {
                 currentDateIndicator: true,
@@ -68,11 +73,10 @@ function drawSchedule(dataSet) {
                 }
             }
         });
-
     });
 }
 
 //--- Switching Schedules
 $('#schedules').on('click', '*', function() {
-    drawSchedule($(this).attr('data-value'));
+    drawSchedule($(this).attr('data-value'), $(this).attr('data-title'));
 });
