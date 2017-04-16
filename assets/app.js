@@ -3,12 +3,30 @@ function convert(date) {
     return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), 1).getTime();
 }
 
-//--- Draw Default
-drawSchedule('3.0-schedule', '3.0 Schedule', false);
+//--- Draw Schedules
+$(document).ready(function() {
+    //--- Load & Draw All Schedules
+    $.getJSON('assets/data/index.json', function(indicies) {
+        $.each(indicies, function(k, index) {
 
-function drawSchedule(dataSet, title, criticalPath) {
+            //--- Create content id
+            var contentID = index.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+            var containerID = contentID + '-graph';
 
-    $.getJSON('assets/data/' + dataSet + '.json', function(data) {
+            //--- Append menue & tab
+            $('#schedules').append('<li><a href="#" id="' + contentID + '">' + index.name  + '</a></li>');
+            $('#containers').append('<div id="' + containerID + '"></div>')
+
+            //--- Draw schedule
+            drawSchedule(index.file, index.name, containerID, false);
+
+        });
+    });
+});
+
+function drawSchedule(file, title, containerID, criticalPath) {
+
+    $.getJSON('assets/data/' + file, function(data) {
 
         //--- Array to store the data
         var seriesData = [];
@@ -48,8 +66,7 @@ function drawSchedule(dataSet, title, criticalPath) {
                     var s = convert(v.start), e = convert(v.end);
 
                     //--- How much is overall done by multipling it with its according weight.
-                    overallDone += Math.max(0, Math.min(1, parseFloat(moment().diff(s) / moment(e).diff(s)))) * (moment(e).diff(s) / weight);
-
+                    overallDone += Math.max(0, Math.min(1, moment().diff(s) / moment(e).diff(s))) * (moment(e).diff(s) / weight);
                     //--- Add data
                     tmp.data.push({
                         taskName: v.title,
@@ -94,7 +111,7 @@ function drawSchedule(dataSet, title, criticalPath) {
 
 
         var fontColor = '#3FC9E1';
-        Highcharts.ganttChart('container', {
+        Highcharts.ganttChart(containerID, {
             series: seriesData,
             chart: {
                 backgroundColor: 'rgba(255, 255, 255, 0)',
@@ -180,12 +197,24 @@ function drawSchedule(dataSet, title, criticalPath) {
                         }
                     }
                 }
-            }
+            },
+            /*TODO exporting: {
+                fallbackToExportServer: false
+            }*/
         });
     });
 }
 
 //--- Switching Schedules
-$('#schedules').on('click', '*', function() {
-    drawSchedule($(this).attr('data-value'), $(this).attr('data-title'), false);
+$('#schedules').on('click', 'a', function() {
+
+    var containerID = $(this).attr('id') + '-graph';
+
+    $('#containers > div').each(function() {
+        $(this).hide();
+    });
+
+    console.log(this);
+    $('#' + containerID).fadeIn('slow');
+
 });
