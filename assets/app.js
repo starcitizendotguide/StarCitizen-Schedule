@@ -6,33 +6,34 @@ function convert(date) {
 //--- Draw Schedules
 $(document).ready(function() {
     //--- Load & Draw All Schedules
+    var first = null;
     $.getJSON('assets/data/index.json', function(indicies) {
+
         $.each(indicies, function(k, index) {
 
             //--- Create content id
             var contentID = index.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
             var containerID = contentID + '-graph';
 
+            if(first === null) first = containerID;
+
             //--- Append menue & tab
             $('#schedules').append('<li><a href="#" id="' + contentID + '">' + index.name  + '</a></li>');
-            $('#containers').append('<div class="container" id="' + containerID + '"></div>')
+            $('#containers').append('<div style="width: 99%;" id="' + containerID + '"></div>')
 
             //--- Draw schedule
             drawSchedule(index.file, index.name, containerID, false);
 
-
-
         });
 
-        var first = true;
-        $.each(indicies, function(k, index) {
-            //--- Only show the first graph
-            if(!(first)) {
-                $('#' + containerID).hide();
-            }
-            first = false;
+
+        $('#containers > div').each(function() {
+            $(this).hide();
         });
+
+        $('#' + first).fadeIn('slow');
     });
+
 });
 
 function drawSchedule(file, title, containerID, criticalPath) {
@@ -68,6 +69,10 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 })
             });
 
+            //--- Local min & max
+            var localMinDate = Number.MAX_SAFE_INTEGER;
+            var localMaxDate = Number.MIN_SAFE_INTEGER;
+
             //--- Append all Childs
             $.each(value.children, function(k, v) {
                 var dependencyId = null;
@@ -75,6 +80,10 @@ function drawSchedule(file, title, containerID, criticalPath) {
 
                     //--- Converting start & end point to Date
                     var s = convert(v.start), e = convert(v.end);
+
+                    //--- Find local max & min date
+                    localMinDate = Math.min(localMinDate, s);
+                    localMaxDate = Math.max(localMaxDate, e);
 
                     //--- How much is overall done by multipling it with its according weight.
                     overallDone += Math.max(0, Math.min(1, moment().diff(s) / moment(e).diff(s))) * (moment(e).diff(s) / weight);
@@ -107,8 +116,8 @@ function drawSchedule(file, title, containerID, criticalPath) {
             tmp.data.unshift({
                 taskName: value.title,
                 id: value.title,
-                start: convert(value.start),
-                end: convert(value.end),
+                start: localMinDate,
+                end: localMaxDate,
                 completed: {
                     amount: parseFloat(overallDone.toFixed(4)),
                     fill: '#40e6f0'
