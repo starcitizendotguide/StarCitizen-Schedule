@@ -7,7 +7,6 @@ function convert(date) {
 $(document).ready(function() {
     //--- Load & Draw All Schedules
     $.getJSON('assets/data/index.json', function(indicies) {
-        var first = true;
         $.each(indicies, function(k, index) {
 
             //--- Create content id
@@ -16,17 +15,22 @@ $(document).ready(function() {
 
             //--- Append menue & tab
             $('#schedules').append('<li><a href="#" id="' + contentID + '">' + index.name  + '</a></li>');
-            $('#containers').append('<div id="' + containerID + '"></div>')
+            $('#containers').append('<div class="container" id="' + containerID + '"></div>')
 
             //--- Draw schedule
             drawSchedule(index.file, index.name, containerID, false);
 
+
+
+        });
+
+        var first = true;
+        $.each(indicies, function(k, index) {
             //--- Only show the first graph
             if(!(first)) {
                 $('#' + containerID).hide();
             }
             first = false;
-
         });
     });
 });
