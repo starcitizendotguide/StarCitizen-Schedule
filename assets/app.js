@@ -94,6 +94,18 @@ function drawSchedule(dataSet, title) {
                 formatter: function() {
                     return '<b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i>';
                 }
+            },
+            plotOptions: {
+                series: {
+                    dataLabels: {
+                        formatter: function() {
+                            if(this.point.completed === undefined) {
+                                return;
+                            }
+                            return Highcharts.numberFormat(this.point.completed.amount * 100, 2) + '% of all sub tasks completed';
+                        }
+                    }
+                }
             }
         });
     });
