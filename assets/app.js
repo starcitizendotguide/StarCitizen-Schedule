@@ -4,14 +4,16 @@ function convert(date) {
 }
 
 //--- Draw Default
-drawSchedule('3.0-schedule', '3.0 Schedule');
+drawSchedule('3.0-schedule', '3.0 Schedule', false);
 
-function drawSchedule(dataSet, title) {
+function drawSchedule(dataSet, title, criticalPath) {
 
     $.getJSON('assets/data/' + dataSet + '.json', function(data) {
 
         //--- Array to store the data
         var seriesData = [];
+        var highlights = [];
+
         var minDate = Number.MAX_SAFE_INTEGER;
         var maxDate = Number.MIN_SAFE_INTEGER;
 
@@ -30,7 +32,6 @@ function drawSchedule(dataSet, title) {
 
             //--- Overall
             var overallDone = 0;
-
             var weight = 0;
             $.each(value.children, function(k, v) {
                 $.each(v, function(k, v) {
@@ -56,14 +57,25 @@ function drawSchedule(dataSet, title) {
                         start: s,
                         end: e,
                         parent: value.title,
-                        //dependency: dependencyId
+                        dependency: dependencyId,
+                        /*
+                        details: {
+                            advantage: 'Performance Improvement',
+                            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+                        }*/
                     });
-                    dependencyId = v.title;
+
+                    //--- Only store if we wanna draw the critical path, otherwise
+                    // we can just ignore it
+                    if(criticalPath) {
+                        dependencyId = v.title;
+                    }
                 });
 
             });
 
-            //--- Create parent
+            //--- Create parent & active highlighting
+            highlights.push(value.title);
             tmp.data.unshift({
                 taskName: value.title,
                 id: value.title,
@@ -71,7 +83,7 @@ function drawSchedule(dataSet, title) {
                 end: convert(value.end),
                 completed: {
                     amount: parseFloat(overallDone.toFixed(4)),
-                    fill: '#00FF94'
+                    fill: '#40e6f0'
                 }
             });
 
@@ -80,19 +92,81 @@ function drawSchedule(dataSet, title) {
 
         });
 
+
+        var fontColor = '#3FC9E1';
         Highcharts.ganttChart('container', {
-            title: {
-                text: title
+            series: seriesData,
+            chart: {
+                backgroundColor: 'rgba(255, 255, 255, 0)',
+                style: {
+                    fontFamily: 'Electrolize',
+                    color: fontColor
+                }
             },
-            xAxis: {
+            title: {
+                text: title,
+                style: {
+                    color: fontColor
+                }
+            },
+            xAxis:{
                 currentDateIndicator: true,
                 min: minDate,
-                max: maxDate
+                max: maxDate,
+                labels: {
+                    style: {
+                        color: fontColor
+                    }
+                }
             },
-            series: seriesData,
+            yAxis: {
+                labels: {
+                    style: {
+                        color: fontColor
+                    },
+                    formatter: function() {
+                        if(highlights.includes(this.value)) {
+                            return '<b>' + this.value + '</b>';
+                        }
+
+                        return this.value;
+                    }
+                }
+            },
+            legend: {
+                itemStyle: {
+                    color: fontColor
+                },
+                itemHoverStyle: {
+                    color: '#C3F2FF',
+	                'text-shadow': '0 0 46px rgba(13, 71, 203, 0.57), 0 0 13px rgba(0, 112, 202, 0.75);'
+                }
+            },
+            credits: {
+                enabled: true
+            },
             tooltip: {
+                style: {
+                    width: '400%'
+                },
                 formatter: function() {
-                    return '<b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i>';
+                    var value = '<b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY');
+
+                    if(this.point.hasOwnProperty('details')) {
+                        var advantage = this.point.details.advantage;
+                        var description = this.point.details.description;
+                        //--- Append Advantage
+                        if(!(advantage === undefined)) {
+                            value += '<br /><b>Advantage:</b> ' + advantage;
+                        }
+
+                        //--- Append Description
+                        if(!(description === undefined)) {
+                            value += '<br /><b>Description:</b> ' + description;
+                        }
+                    }
+
+                    return value;
                 }
             },
             plotOptions: {
@@ -113,5 +187,5 @@ function drawSchedule(dataSet, title) {
 
 //--- Switching Schedules
 $('#schedules').on('click', '*', function() {
-    drawSchedule($(this).attr('data-value'), $(this).attr('data-title'));
+    drawSchedule($(this).attr('data-value'), $(this).attr('data-title'), $('#criticalPath').checked);
 });

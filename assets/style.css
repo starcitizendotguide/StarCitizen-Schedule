@@ -1,11 +1,36 @@
-nav {background:#FFF;float:left;}
-nav ul {text-align:center;}
-nav ul li {float:left;display:inline;}
-nav ul li:hover {background:#E6E6E6;}
-nav ul li a {display:block;padding:15px 25px;color:#444;}
-nav ul li ul {position:absolute;width:110px;background:#FFF;}
-nav ul li ul li {width:110px;}
-nav ul li ul li a {display:block;padding:15px 10px;color:#444;}
-nav ul li ul li:hover a {background:#F7F7F7;}
-nav ul li ul.fallback {display:none;}
-nav ul li:hover ul.fallback {display:block;}
+/**
+*    CIGs awesome background. Thank you guys. - http://robertsspaceindustries.com/
+*/
+@font-face {
+  font-family: 'Electrolize';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Electrolize'), local('Electrolize-Regular'), url('fonts/Electrolize.woff2') format('woff2');
+  unicode-range: U+0-FF, U+131, U+152-153, U+2C6, U+2DA, U+2DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}
+body {
+    font-family: 'Electrolize';
+    background: url('img/background.jpg') repeat;
+}
+.grid {
+    background: transparent url('img/gridbg_glow.png') repeat;
+}
+
+/**
+*    Not CIGs CSS stuff
+*/
+nav {
+    float: left;
+}
+nav ul {
+    text-align: center;
+}
+nav ul li {
+    float: left;
+    display: inline;
+}
+nav ul li a {
+    display: block;
+    padding: 15px 25px;
+    color: #3fc9e1;
+}
