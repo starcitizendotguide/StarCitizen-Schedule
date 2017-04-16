@@ -25,31 +25,56 @@ function drawSchedule(dataSet, title) {
             };
 
             //--- Create Parent
-            tmp.data.push({
-                taskName: value.title,
-                id: value.title,
-                start: convert(value.start),
-                end: convert(value.end)
-            });
+            tmp.data.push();
 
             //--- Find Start And End Of Schedule
             minDate = Math.min(minDate, convert(value.start));
             maxDate = Math.max(maxDate, convert(value.end));
 
+            //--- Overall
+            var overallDone = 0;
+
+            var weight = 0;
+            $.each(value.children, function(k, v) {
+                $.each(v, function(k, v) {
+                    weight += moment(convert(v.end)).diff(convert(v.start));
+                })
+            });
+
             //--- Append all Childs
             $.each(value.children, function(k, v) {
                 var dependencyId = null;
                 $.each(v, function(k, v) {
+
+                    //--- Converting start & end point to Date
+                    var s = convert(v.start), e = convert(v.end);
+
+                    //--- How much is overall done by multipling it with its according weight.
+                    overallDone += Math.max(0, Math.min(1, parseFloat(moment().diff(s) / moment(e).diff(s)))) * (moment(e).diff(s) / weight);
+
+                    //--- Add data
                     tmp.data.push({
                         taskName: v.title,
                         id: v.title,
-                        start: convert(v.start),
-                        end: convert(v.end),
-                        parent: value.title
-                        //dependency: dependencyId,
+                        start: s,
+                        end: e,
+                        parent: value.title,
+                        //dependency: dependencyId
                     });
                     dependencyId = v.title;
                 });
+
+            });
+
+            tmp.data.unshift({
+                taskName: value.title,
+                id: value.title,
+                start: convert(value.start),
+                end: convert(value.end),
+                completed: {
+                    amount: parseFloat(overallDone.toFixed(4)),
+                    fill: '#00FF94'
+                }
             });
 
             //--- Push Final Data
