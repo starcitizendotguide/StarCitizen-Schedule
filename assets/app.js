@@ -145,7 +145,6 @@ function drawSchedule(file, title, containerID, criticalPath) {
                         if(highlights.includes(this.value)) {
                             return '<b>' + this.value + '</b>';
                         }
-
                         return this.value;
                     }
                 }
@@ -214,7 +213,6 @@ $('#schedules').on('click', 'a', function() {
         $(this).hide();
     });
 
-    console.log(this);
     $('#' + containerID).fadeIn('slow');
 
 });
