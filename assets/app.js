@@ -7,6 +7,7 @@ function convert(date) {
 $(document).ready(function() {
     //--- Load & Draw All Schedules
     $.getJSON('assets/data/index.json', function(indicies) {
+        var first = true;
         $.each(indicies, function(k, index) {
 
             //--- Create content id
@@ -19,6 +20,12 @@ $(document).ready(function() {
 
             //--- Draw schedule
             drawSchedule(index.file, index.name, containerID, false);
+
+            //--- Only show the first graph
+            if(!(first)) {
+                $('#' + containerID).hide();
+            }
+            first = false;
 
         });
     });
