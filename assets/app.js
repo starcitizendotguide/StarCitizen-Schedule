@@ -187,5 +187,5 @@ function drawSchedule(dataSet, title, criticalPath) {
 
 //--- Switching Schedules
 $('#schedules').on('click', '*', function() {
-    drawSchedule($(this).attr('data-value'), $(this).attr('data-title'), $('#criticalPath').checked);
+    drawSchedule($(this).attr('data-value'), $(this).attr('data-title'), false);
 });

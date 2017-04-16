@@ -16,6 +16,10 @@ body {
     background: transparent url('img/gridbg_glow.png') repeat;
 }
 
+#container {
+    width: 99%;
+}
+
 /**
 *    Not CIGs CSS stuff
 */
