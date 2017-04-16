@@ -24,9 +24,6 @@ function drawSchedule(dataSet, title) {
                 'data': []
             };
 
-            //--- Create Parent
-            tmp.data.push();
-
             //--- Find Start And End Of Schedule
             minDate = Math.min(minDate, convert(value.start));
             maxDate = Math.max(maxDate, convert(value.end));
@@ -66,6 +63,7 @@ function drawSchedule(dataSet, title) {
 
             });
 
+            //--- Create parent
             tmp.data.unshift({
                 taskName: value.title,
                 id: value.title,
