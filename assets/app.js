@@ -3,19 +3,26 @@ function convert(date) {
     return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), 1).getTime();
 }
 
+//--- We are storing this to display the first graph when everything else is done and the
+// page is ready to be shown.
+var firstGraphToDraw = null;
+var drawFirst = true;
+
 //--- Draw Schedules
 $(document).ready(function() {
+
+    $('#schedules').hide();
+
     //--- Load & Draw All Schedules
-    var first = null;
     $.getJSON('assets/data/index.json', function(indicies) {
 
         $.each(indicies, function(k, index) {
-
+            
             //--- Create content id
             var contentID = index.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
             var containerID = contentID + '-graph';
 
-            if(first === null) first = containerID;
+            if (firstGraphToDraw === null) firstGraphToDraw = containerID;
 
             //--- Append menue & tab
             $('#schedules').append('<li><a href="#" id="' + contentID + '">' + index.name  + '</a></li>');
@@ -23,15 +30,13 @@ $(document).ready(function() {
 
             //--- Draw schedule
             drawSchedule(index.file, index.name, containerID, false);
-
+            
         });
 
-
+        //--- Hide & Seek
         $('#containers > div').each(function() {
             $(this).hide();
         });
-
-        $('#' + first).fadeIn('slow');
     });
 
 });
@@ -129,8 +134,10 @@ function drawSchedule(file, title, containerID, criticalPath) {
 
         });
 
-
+        //--- Some settings
+        var ignoreFirstLoad = true;
         var fontColor = '#3FC9E1';
+
         Highcharts.ganttChart(containerID, {
             series: seriesData,
             chart: {
@@ -138,6 +145,23 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 style: {
                     fontFamily: 'Electrolize',
                     color: fontColor
+                },
+                events: {
+                    load: function(event) {
+                        //--- Ignore the first load, because this gets fired eventhough it didn't finish loading yet
+                        if (ignoreFirstLoad) {
+                            ignoreFirstLoad = false;
+                            return;
+                        }
+
+                        //--- We only wanna kick this in once and ignore all other graphs.
+                        if (drawFirst) {
+                            $('#loading').hide();
+                            $('#schedules').fadeIn('slow');
+                            $('#' + firstGraphToDraw).fadeIn('slow');
+                            drawFirst = false;
+                        }
+                    }
                 }
             },
             title: {
