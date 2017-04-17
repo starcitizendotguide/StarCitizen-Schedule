@@ -6,12 +6,27 @@ function convert(date) {
 //--- We are storing this to display the first graph when everything else is done and the
 // page is ready to be shown.
 var firstGraphToDraw = null;
-var drawFirst = true;
+var drawFirst = false;
+
+//--- Map to store the details
+var detailMap = [];
 
 //--- Draw Schedules
 $(document).ready(function() {
-
+        
+    //--- Hide menue
     $('#schedules').hide();
+        
+    //--- Load all details
+    $.getJSON('assets/data/details.json', function (details) {
+
+        $.each(details, function (k, detail) {
+               
+            detailMap[detail.id] = detail.content;
+
+        });
+
+    });
 
     //--- Load & Draw All Schedules
     $.getJSON('assets/data/index.json', function(indicies) {
@@ -26,9 +41,13 @@ $(document).ready(function() {
 
             //--- Append menue & tab
             $('#schedules').append('<li><a href="#" id="' + contentID + '">' + index.name  + '</a></li>');
-            $('#containers').append('<div style="width: 99%;" id="' + containerID + '"></div>')
+            $('#containers').append('<div style="width: 98%;" id="' + containerID + '"></div>')
 
             //--- Draw schedule
+            if (k === indicies.length - 1) {
+                //--- Loading done when we arrived at the last schedule
+                drawFirst = true;
+            }
             drawSchedule(index.file, index.name, containerID, false);
             
         });
@@ -43,7 +62,7 @@ $(document).ready(function() {
 
 function drawSchedule(file, title, containerID, criticalPath) {
 
-    $.getJSON('assets/data/' + file, function(data) {
+    $.getJSON('assets/data/schedules/' + file, function (data) {
 
         //--- Array to store the data
         var seriesData = [];
@@ -100,11 +119,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                         end: e,
                         parent: value.title,
                         dependency: dependencyId,
-                        /*
-                        details: {
-                            advantage: 'Performance Improvement',
-                            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
-                        }*/
+                        detailID: v.detailID,
                     });
 
                     //--- Only store if we wanna draw the critical path, otherwise
@@ -210,23 +225,15 @@ function drawSchedule(file, title, containerID, criticalPath) {
                     width: '400%'
                 },
                 formatter: function() {
-                    var value = '<b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY');
+                    var tooltipContent = '<b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY');
 
-                    if(this.point.hasOwnProperty('details')) {
-                        var advantage = this.point.details.advantage;
-                        var description = this.point.details.description;
-                        //--- Append Advantage
-                        if(!(advantage === undefined)) {
-                            value += '<br /><b>Advantage:</b> ' + advantage;
-                        }
-
-                        //--- Append Description
-                        if(!(description === undefined)) {
-                            value += '<br /><b>Description:</b> ' + description;
-                        }
+                    if (!(this.point.detailID === undefined)) {
+                        $.each(detailMap[this.point.detailID], function (k, value) {
+                            tooltipContent += '<br />' + value.title + ' ' + value.text;
+                        });
                     }
 
-                    return value;
+                    return tooltipContent;
                 }
             },
             plotOptions: {
