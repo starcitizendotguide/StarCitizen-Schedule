@@ -1,8 +1,6 @@
 [
   {
     "title": "Persistent Universe Combat",
-    "start": "3.4.2017",
-    "end": "2.6.2017",
     "children": [
       [
         {
@@ -50,8 +48,6 @@
   },
   {
     "title": "Gameplay",
-    "start": "3.4.2017",
-    "end": "8.6.2017",
     "children": [
       [
         {
@@ -169,8 +165,6 @@
   },
   {
     "title": "Core Tech",
-    "start": "3.4.2017",
-    "end": "31.5.2017",
     "children": [
       [
         {
@@ -204,8 +198,6 @@
   },
   {
     "title": "UI",
-    "start": "3.4.2017",
-    "end": "6.6.2017",
     "children": [
       [
         {
@@ -302,8 +294,6 @@
   },
   {
     "title": "AI",
-    "start": "3.4.2017",
-    "end": "31.5.2017",
     "children": [
       [
         {
@@ -323,8 +313,6 @@
   },
   {
     "title": "Graphics",
-    "start": "3.4.2017",
-    "end": "2.6.2017",
     "children": [
       [
         {
@@ -372,8 +360,6 @@
   },
   {
     "title": "Backend",
-    "start": "3.4.2017",
-    "end": "16.6.2017",
     "children": [
       [
         {
@@ -400,8 +386,6 @@
   },
   {
     "title": "Network",
-    "start": "3.4.2017",
-    "end": "26.6.2017",
     "children": [
       [
         {
@@ -428,8 +412,6 @@
   },
   {
     "title": "Ships & Weapons",
-    "start": "3.4.2017",
-    "end": "14.6.2017",
     "children": [
       [
         {

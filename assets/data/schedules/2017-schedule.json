@@ -1,8 +1,6 @@
 [
   {
     "title": "Core Tech",
-    "start": "24.3.2017",
-    "end": "5.1.2018",
     "children": [
       [
         {
@@ -178,8 +176,6 @@
   },
   {
     "title": "FPS",
-    "start": "13.3.2017",
-    "end": "5.1.2018",
     "children": [
       [
         {
@@ -301,8 +297,6 @@
   },
   {
     "title": "Gameplay",
-    "start": "3.4.2017",
-    "end": "7.12.2017",
     "children": [
       [
         {
@@ -586,8 +580,6 @@
   },
   {
     "title": "AI",
-    "start": "3.4.2017",
-    "end": "22.12.2017",
     "children": [
       [
         {
@@ -681,8 +673,6 @@
   },
   {
     "title": "UI",
-    "start": "3.4.2017",
-    "end": "15.6.2017",
     "children": [
       [
         {
@@ -744,8 +734,6 @@
   },
   {
     "title": "Graphics",
-    "start": "3.4.2017",
-    "end": "21.12.2017",
     "children": [
       [
         {
@@ -829,8 +817,6 @@
   },
   {
     "title": "Weapons",
-    "start": "6.3.2017",
-    "end": "15.12.2017",
     "children": [
       [
         {
@@ -921,8 +907,6 @@
   },
   {
     "title": "Ships",
-    "start": "20.12.2016",
-    "end": "8.5.2018",
     "children": [
       [
         {
@@ -1085,8 +1069,6 @@
   },
   {
     "title": "Environments",
-    "start": "26.12.2016",
-    "end": "14.2.2018",
     "children": [
       [
         {
@@ -1148,8 +1130,6 @@
   },
   {
     "title": "Network/Backend",
-    "start": "20.12.2016",
-    "end": "13.9.2017",
     "children": [
       [
         {

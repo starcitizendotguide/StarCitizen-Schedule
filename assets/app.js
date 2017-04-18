@@ -73,8 +73,12 @@ function drawSchedule(file, title, containerID, criticalPath) {
         var seriesData = [];
         var highlights = [];
 
+        //--- Min & Max to scale x-axis correctly
         var minDate = Number.MAX_SAFE_INTEGER;
         var maxDate = Number.MIN_SAFE_INTEGER;
+
+        //--- Overall progress
+        var projectProgress = [];
 
         //--- Parse the Data
         $.each(data, function(key, value) {
@@ -85,11 +89,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 'data': []
             };
 
-            //--- Find Start And End Of Schedule
-            minDate = Math.min(minDate, convertToDate(value.start, true));
-            maxDate = Math.max(maxDate, convertToDate(value.end, false));
-
-            //--- Overall
+            //--- Overall sub task progress
             var overallDone = 0;
             var weight = 0;
             $.each(value.children, function(k, v) {
@@ -136,6 +136,12 @@ function drawSchedule(file, title, containerID, criticalPath) {
 
             });
 
+            //--- Track total project progress
+            projectProgress.push({
+                progress: overallDone,
+                weight: weight
+            });
+
             //--- Create parent & active highlighting
             highlights.push(value.title);
             tmp.data.unshift({
@@ -149,9 +155,41 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 }
             });
 
+
+            //--- Find Start And End Of Schedule
+            minDate = Math.min(minDate, localMinDate);
+            maxDate = Math.max(maxDate, localMaxDate);
+
             //--- Push Final Data
             seriesData.push(tmp);
 
+        });
+
+        //--- Calculate project progress
+        console.log(projectProgress);
+        var projectTotalWeight = 0;
+        var projectTotalProgress = 0;
+        $.each(projectProgress, function (k, entry) {
+            projectTotalWeight += entry.weight;
+        });
+        $.each(projectProgress, function (k, entry) {
+            projectTotalProgress += (entry.weight / projectTotalWeight * entry.progress);
+        });
+
+        highlights.push(title);
+        seriesData.unshift({
+            name: title,
+            data: [
+                {
+                    taskName: title,
+                    start: minDate,
+                    end: maxDate,
+                    completed: {
+                        amount: parseFloat(projectTotalProgress.toFixed(4)),
+                        fill: '#40e6f0'
+                    }
+                }
+            ]
         });
 
         //--- Some settings
