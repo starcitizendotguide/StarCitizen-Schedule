@@ -191,7 +191,8 @@
         {
           "title": "Entity Owner Manager",
           "start": "6.4.2017",
-          "end": "29.5.2017"
+          "end": "29.5.2017",
+          "detailID": "entity-owner-manager"
         }
       ]
     ]
@@ -318,7 +319,8 @@
         {
           "title": "Render to Texture",
           "start": "3.4.2017",
-          "end": "24.5.2017"
+          "end": "24.5.2017",
+          "detailID": "render-to-texture"
         }
       ],
       [
@@ -379,7 +381,8 @@
         {
           "title": "Diffusion Subset for 3.0.0",
           "start": "3.4.2017",
-          "end": "16.6.2017"
+          "end": "16.6.2017",
+          "detailID": "diffusion-subset"
         }
       ]
     ]
@@ -403,9 +406,10 @@
       ],
       [
         {
-          "title": "Network Bind/Unbding - Stretch Goal",
+          "title": "Network Bind / Unbind - Stretch Goal",
           "start": "18.4.2017",
-          "end": "26.6.2017"
+          "end": "26.6.2017",
+          "detailID": "network-bind-unbind"
         }
       ]
     ]

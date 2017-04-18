@@ -1,10 +1,37 @@
 ﻿[
   {
-    "id": "example",
+    "id": "entity-owner-manager",
     "content": [
       {
         "title": "<b>Description:</b>",
-        "text": "Lorem Impsum."
+        "text": "The Entity Owner Manager will track entities that are moved around the universe, making sure we spawn and unspawn them at the correct time."
+      }
+    ]
+  },
+  {
+    "id": "render-to-texture",
+    "content": [
+      {
+        "title": "<b>Description:</b>",
+        "text": "This will have many uses going forwards, but our focus for now is to improve UI rendering and to introduce live rendering of video communications. We’re aiming to improve rendering performance by rendering as much of the UI ahead of a frame. For video communications, this will mean that we don’t have to pre-render the comms and store those files on the hard drive, as is the case with most games, allowing us to maintain fidelity and save hard drive space."
+      }
+    ]
+  },
+  {
+    "id": "diffusion-subset",
+    "content": [
+      {
+        "title": "<b>Description:</b>",
+        "text": "Diffusion is our second-generation cloud-oriented back-end service architecture. It dramatically simplifies the effort required to implement, maintain, and interact with services, while simultaneously providing major enhancements in the areas of scalability and redundancy."
+      }
+    ]
+  },
+  {
+    "id": "network-bind-unbind",
+    "content": [
+      {
+        "title": "<b>Description:</b>",
+        "text": "Eliminate network updates for entities far away from clients. Should greatly reduce the amount of work the netcode has to do, helping improve server performance. A greater proportion of client bandwidth will be spent on entities close to the client."
       }
     ]
   }

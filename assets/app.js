@@ -18,6 +18,9 @@ var detailMap = [];
 //--- Draw Schedules
 $(document).ready(function() {
         
+    //--- We don't like the cache :P
+    $.ajaxSetup({ cache: false });
+
     //--- Hide menue & disclaimer
     $('#schedules').hide();
     $('.disclaimer').hide();
@@ -127,6 +130,10 @@ function drawSchedule(file, title, containerID, criticalPath) {
                         detailID: v.detailID,
                     });
 
+                    if (!(v.detailID === undefined) && detailMap[v.detailID] === undefined) {
+                        console.error("Content System: The child with the ID \"" + v.title + "\" (" + file + ") uses the detail \"" + v.detailID + "\" which does not exist.");
+                    }
+
                     //--- Only store if we wanna draw the critical path, otherwise
                     // we can just ignore it
                     if(criticalPath) {
@@ -166,7 +173,6 @@ function drawSchedule(file, title, containerID, criticalPath) {
         });
 
         //--- Calculate project progress
-        console.log(projectProgress);
         var projectTotalWeight = 0;
         var projectTotalProgress = 0;
         $.each(projectProgress, function (k, entry) {
