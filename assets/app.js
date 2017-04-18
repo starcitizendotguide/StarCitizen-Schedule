@@ -14,8 +14,9 @@ var detailMap = [];
 //--- Draw Schedules
 $(document).ready(function() {
         
-    //--- Hide menue
+    //--- Hide menue & disclaimer
     $('#schedules').hide();
+    $('.disclaimer').hide();
         
     //--- Load all details
     $.getJSON('assets/data/details.json', function (details) {
@@ -172,8 +173,10 @@ function drawSchedule(file, title, containerID, criticalPath) {
                         //--- We only wanna kick this in once and ignore all other graphs.
                         if (drawFirst) {
                             $('#loading').hide();
+
                             $('#schedules').fadeIn('slow');
                             $('#' + firstGraphToDraw).fadeIn('slow');
+                            $('.disclaimer').fadeIn('slow');
                             drawFirst = false;
                         }
                     }
@@ -243,7 +246,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                             if(this.point.completed === undefined) {
                                 return;
                             }
-                            return Highcharts.numberFormat(this.point.completed.amount * 100, 2) + '% of all sub tasks completed';
+                            return Highcharts.numberFormat(this.point.completed.amount * 100, 2) + '% progress in all sub tasks';
                         }
                     }
                 }
