@@ -1,6 +1,10 @@
-function convert(date) {
+function convertToDate(date) {
     var dateParts = date.match(/(\d+)\.(\d+)\.(\d+)/);
-    return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), 1).getTime();
+    return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), 23, 59, 59, 999).getTime();
+}
+
+function convertContentToContainer(containerID) {
+    return containerID.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
 }
 
 //--- We are storing this to display the first graph when everything else is done and the
@@ -35,7 +39,7 @@ $(document).ready(function() {
         $.each(indicies, function(k, index) {
             
             //--- Create content id
-            var contentID = index.name.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+            var contentID = convertContentToContainer(index.name);
             var containerID = contentID + '-graph';
 
             if (firstGraphToDraw === null) firstGraphToDraw = containerID;
@@ -82,15 +86,15 @@ function drawSchedule(file, title, containerID, criticalPath) {
             };
 
             //--- Find Start And End Of Schedule
-            minDate = Math.min(minDate, convert(value.start));
-            maxDate = Math.max(maxDate, convert(value.end));
+            minDate = Math.min(minDate, convertToDate(value.start));
+            maxDate = Math.max(maxDate, convertToDate(value.end));
 
             //--- Overall
             var overallDone = 0;
             var weight = 0;
             $.each(value.children, function(k, v) {
                 $.each(v, function(k, v) {
-                    weight += moment(convert(v.end)).diff(convert(v.start));
+                    weight += moment(convertToDate(v.end)).diff(convertToDate(v.start));
                 })
             });
 
@@ -104,7 +108,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 $.each(v, function(k, v) {
 
                     //--- Converting start & end point to Date
-                    var s = convert(v.start), e = convert(v.end);
+                    var s = convertToDate(v.start), e = convertToDate(v.end);
 
                     //--- Find local max & min date
                     localMinDate = Math.min(localMinDate, s);
