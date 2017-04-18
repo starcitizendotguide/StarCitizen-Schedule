@@ -1,6 +1,6 @@
-function convertToDate(date) {
+function convertToDate(date, start) {
     var dateParts = date.match(/(\d+)\.(\d+)\.(\d+)/);
-    return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), 23, 59, 59, 999).getTime();
+    return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), (start ? 0 : 23), (start ? 0 : 59), (start ? 0 : 59), (start ? 0 : 999)).getTime();
 }
 
 function convertContentToContainer(containerID) {
@@ -86,15 +86,15 @@ function drawSchedule(file, title, containerID, criticalPath) {
             };
 
             //--- Find Start And End Of Schedule
-            minDate = Math.min(minDate, convertToDate(value.start));
-            maxDate = Math.max(maxDate, convertToDate(value.end));
+            minDate = Math.min(minDate, convertToDate(value.start, true));
+            maxDate = Math.max(maxDate, convertToDate(value.end, false));
 
             //--- Overall
             var overallDone = 0;
             var weight = 0;
             $.each(value.children, function(k, v) {
                 $.each(v, function(k, v) {
-                    weight += moment(convertToDate(v.end)).diff(convertToDate(v.start));
+                    weight += moment(convertToDate(v.end, false)).diff(convertToDate(v.start, true));
                 })
             });
 
@@ -108,7 +108,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 $.each(v, function(k, v) {
 
                     //--- Converting start & end point to Date
-                    var s = convertToDate(v.start), e = convertToDate(v.end);
+                    var s = convertToDate(v.start, true), e = convertToDate(v.end, false);
 
                     //--- Find local max & min date
                     localMinDate = Math.min(localMinDate, s);
