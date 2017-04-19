@@ -35,6 +35,11 @@ hr {
     text-align:justify;
 }
 
+.highcharts-tooltip > span {
+    height: auto;
+    width: auto;
+}
+
 .highcharts-tooltip img {
     width: 100%;
     display: block;
