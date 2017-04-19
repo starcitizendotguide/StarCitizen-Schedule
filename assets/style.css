@@ -21,6 +21,16 @@ hr {
     background: transparent url('img/gridbg_glow.png') repeat;
 }
 
+#tooltip {
+    display: none;
+    width: 100px;
+    border: 1px solid red;
+    padding: 10px;
+    z-index: 9999;
+    position: absolute;
+    background: white;
+}
+
 .highcharts-tooltip {
     text-align:justify;
 }
@@ -28,6 +38,7 @@ hr {
 .highcharts-tooltip img {
     width: 100%;
     display: block;
+    position: relative;
 }
 
 #containers {

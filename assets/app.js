@@ -273,7 +273,8 @@ function drawSchedule(file, title, containerID, criticalPath) {
             },
             tooltip: {
                 style: {
-                    width: '500%'
+                    width: '500%',
+                    height: '50%'
                 },
                 useHTML: true,
                 formatter: function() {
@@ -295,7 +296,6 @@ function drawSchedule(file, title, containerID, criticalPath) {
                             firstContentAdd = false;
                         });
                     }
-
                     return tooltipContent;
                 }
             },
