@@ -31,17 +31,12 @@ hr {
     background: white;
 }
 
-.info-box-title {
-    text-align: center;
-    text-transform: uppercase;
-}
-
 .highcharts-tooltip {
     text-align:justify;
 }
 
 .highcharts-tooltip > span {
-    height: auto;
+    height:initial;
     width: auto;
 }
 
@@ -49,6 +44,11 @@ hr {
     width: 100%;
     display: block;
     position: relative;
+}
+
+.highcharts-tooltip .info-box-title {
+    text-align: center;
+    text-transform: uppercase;
 }
 
 #containers {

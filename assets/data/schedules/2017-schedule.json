@@ -824,7 +824,8 @@
         {
           "title": "P8-SC",
           "start": "3.4.2017",
-          "end": "27.4.2017"
+          "end": "27.4.2017",
+          "detailID": "weapons-p8-sc"
         },
         {
           "title": "HRST Electron Beam Modular Sets (S1-3)",
@@ -914,7 +915,8 @@
         {
           "title": "MISC Prospector",
           "start": "3.4.2017",
-          "end": "5.5.2017"
+          "end": "5.5.2017",
+          "detailID": "ships-misc-prospector"
         }
       ],
       [
@@ -928,19 +930,22 @@
         {
           "title": "Drake Dragonfly",
           "start": "3.4.2017",
-          "end": "12.5.2017"
+          "end": "12.5.2017",
+          "detailID": "ships-drake-dragonfly"
         }
       ],
       [
         {
           "title": "RSI Constellation Aquilla",
           "start": "3.4.2017",
-          "end": "12.5.2017"
+          "end": "12.5.2017",
+          "detailID": "ships-rsi-constellation-aquilla"
         },
         {
           "title": "MISC Cutlass Blue",
           "start": "1.6.2017",
-          "end": "2.8.2017"
+          "end": "2.8.2017",
+          "detailID": "ships-drake-cutlass-black"
         },
         {
           "title": "RSI Constellation Pheonix",
@@ -1076,7 +1081,8 @@
         {
           "title": "Surface Outposts",
           "start": "3.4.2017",
-          "end": "2.6.2017"
+          "end": "2.6.2017",
+          "detailID": "environments-surface-outposts"
         }
       ],
       [

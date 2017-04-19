@@ -45,5 +45,53 @@
         "data": "<b>Daymar:</b> Daymar’s surface is like a harmonic blend of Yela and Cellin. It’s mountainous surface is reminiscent of Cellin’s volcanoes, while its craters share a warm likeness to Yela’s frozen crevessases. Known for its dense atmosphere, thick fog and a loose dirt surface makes travel difficult. Lightning storms can help illuminate the fog, just don’t get struck by their flash. <img src=\"https://robertsspaceindustries.com/media/4bz8ruvxgqcecr/post/Daymar_2.gif\"/>"
       }
     ]
+  },
+  {
+    "id": "ships-drake-dragonfly",
+    "content": [
+      {
+        "data": "<img src=\"assets/img/details/ships-drake-dragonfly.jpg\"/>"
+      }
+    ]
+  },
+  {
+    "id": "ships-drake-cutlass-black",
+    "content": [
+      {
+        "data": "<img src=\"assets/img/details/ships-drake-cutlass-black.jpg\"/>"
+      }
+    ]
+  },
+  {
+    "id": "ships-rsi-constellation-aquilla",
+    "content": [
+      {
+        "data": "<img src=\"assets/img/details/ships-rsi-constellation-aquilla.jpg\"/>"
+      }
+    ]
+  },
+  {
+    "id": "ships-misc-prospector",
+    "content": [
+      {
+        "data": "<img src=\"assets/img/details/ships-misc-prospector.jpg\"/>"
+      }
+    ]
+  },
+  {
+    "id": "weapons-p8-sc",
+    "content": [
+      {
+        "data": "<img src=\"assets/img/details/weapons-p8-sc.jpg\"/>"
+      }
+    ]
+  },
+  {
+    "id": "environments-surface-outposts",
+    "content": [
+      {
+        "data": "<img src=\"assets/img/details/environments-surface-outposts.jpg\"/>"
+      }
+    ]
   }
 ]

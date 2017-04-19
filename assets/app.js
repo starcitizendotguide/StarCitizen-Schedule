@@ -1,3 +1,8 @@
+//--- DEVELOPER SETTINGS
+var CONTENT_SYSTEM_ENABLED = false;
+
+
+//--- Some Methods
 function convertToDate(date, start) {
     var dateParts = date.match(/(\d+)\.(\d+)\.(\d+)/);
     return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), (start ? 0 : 23), (start ? 0 : 59), (start ? 0 : 59), (start ? 0 : 999)).getTime();
@@ -278,8 +283,9 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 },
                 useHTML: true,
                 formatter: function () {
-                    var tooltipContent = '<b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i>';
-                    if (!(this.point.detailID === undefined)) {
+                    var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i></div>';
+
+                    if (!(this.point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
 
                         tooltipContent += '<hr />';
 
