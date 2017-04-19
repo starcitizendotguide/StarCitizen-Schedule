@@ -110,13 +110,18 @@ function drawSchedule(file, title, containerID, criticalPath) {
             var localMinDate = Number.MAX_SAFE_INTEGER;
             var localMaxDate = Number.MIN_SAFE_INTEGER;
 
-            //--- Append all Childs
+            //--- Append all Children
             $.each(value.children, function (k, v) {
                 var dependencyId = null;
                 $.each(v, function (k, v) {
 
                     //--- Converting start & end point to Date
                     var s = convertToDate(v.start, true), e = convertToDate(v.end, false);
+
+                    //--- Check for error
+                    if (e < s) {
+                        console.error('The child\'s end date is before its start date. The child ID is "' + v.title + '" (' + file + ')');
+                    }
 
                     //--- Find local max & min date
                     localMinDate = Math.min(localMinDate, s);
