@@ -17,16 +17,16 @@ var detailMap = [];
 
 //--- Draw Schedules
 $(document).ready(function() {
-        
-    //--- We don't like the cache :P
-    $.ajaxSetup({ cache: false });
 
     //--- Hide menue & disclaimer
     $('#schedules').hide();
     $('.disclaimer').hide();
         
+    //--- We don't like the cache :P
+    $.ajaxSetup({ cache: false });
+
     //--- Load all details
-    $.getJSON('assets/data/details.json', function (details) {
+    $.getJSON('assets/data/details.json', { _: new Date().getTime() }, function (details) {
 
         $.each(details, function (k, detail) {
                
@@ -37,7 +37,7 @@ $(document).ready(function() {
     });
 
     //--- Load & Draw All Schedules
-    $.getJSON('assets/data/index.json', function(indicies) {
+    $.getJSON('assets/data/index.json', { _: new Date().getTime() }, function(indicies) {
 
         $.each(indicies, function(k, index) {
             
@@ -70,7 +70,7 @@ $(document).ready(function() {
 
 function drawSchedule(file, title, containerID, criticalPath) {
 
-    $.getJSON('assets/data/schedules/' + file, function (data) {
+    $.getJSON('assets/data/schedules/' + file, { _: new Date().getTime() }, function (data) {
 
         //--- Array to store the data
         var seriesData = [];
@@ -275,12 +275,16 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 style: {
                     width: '400%'
                 },
+                useHTML: true,
                 formatter: function() {
-                    var tooltipContent = '<b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY');
+                    var tooltipContent = '<b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i>';
 
                     if (!(this.point.detailID === undefined)) {
+                        tooltipContent += '<hr />';
+                        var firstContentAdd = true;
                         $.each(detailMap[this.point.detailID], function (k, value) {
-                            tooltipContent += '<br />' + value.title + ' ' + value.text;
+                            tooltipContent += (firstContentAdd ? '' : '<br />') + value.title + ' ' + value.text;
+                            firstContentAdd = false;
                         });
                     }
 
