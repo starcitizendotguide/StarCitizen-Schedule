@@ -4,7 +4,7 @@ function convertToDate(date, start) {
 }
 
 function convertContentToContainer(containerID) {
-    return containerID.toLowerCase().replace(/[^\w ]+/g,'').replace(/ +/g,'-');
+    return containerID.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
 }
 
 //--- We are storing this to display the first graph when everything else is done and the
@@ -16,12 +16,12 @@ var drawFirst = false;
 var detailMap = [];
 
 //--- Draw Schedules
-$(document).ready(function() {
+$(document).ready(function () {
 
     //--- Hide menue & disclaimer
     $('#schedules').hide();
     $('.disclaimer').hide();
-        
+
     //--- We don't like the cache :P
     $.ajaxSetup({ cache: false });
 
@@ -29,7 +29,7 @@ $(document).ready(function() {
     $.getJSON('assets/data/details.json', { _: new Date().getTime() }, function (details) {
 
         $.each(details, function (k, detail) {
-               
+
             detailMap[detail.id] = detail;
 
         });
@@ -37,10 +37,10 @@ $(document).ready(function() {
     });
 
     //--- Load & Draw All Schedules
-    $.getJSON('assets/data/index.json', { _: new Date().getTime() }, function(indicies) {
+    $.getJSON('assets/data/index.json', { _: new Date().getTime() }, function (indicies) {
 
-        $.each(indicies, function(k, index) {
-            
+        $.each(indicies, function (k, index) {
+
             //--- Create content id
             var contentID = convertContentToContainer(index.name);
             var containerID = contentID + '-graph';
@@ -48,7 +48,7 @@ $(document).ready(function() {
             if (firstGraphToDraw === null) firstGraphToDraw = containerID;
 
             //--- Append menue & tab
-            $('#schedules').append('<li><a href="#" id="' + contentID + '">' + index.name  + '</a></li>');
+            $('#schedules').append('<li><a href="#" id="' + contentID + '">' + index.name + '</a></li>');
             $('#containers').append('<div style="width: 98%;" id="' + containerID + '"></div>')
 
             //--- Draw schedule
@@ -57,11 +57,11 @@ $(document).ready(function() {
                 drawFirst = true;
             }
             drawSchedule(index.file, index.name, containerID, false);
-            
+
         });
 
         //--- Hide & Seek
-        $('#containers > div').each(function() {
+        $('#containers > div').each(function () {
             $(this).hide();
         });
     });
@@ -84,7 +84,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
         var projectProgress = [];
 
         //--- Parse the Data
-        $.each(data, function(key, value) {
+        $.each(data, function (key, value) {
 
             //--- Data Building for our default Gantt Diagramm
             var tmp = {
@@ -95,8 +95,8 @@ function drawSchedule(file, title, containerID, criticalPath) {
             //--- Overall sub task progress
             var overallDone = 0;
             var weight = 0;
-            $.each(value.children, function(k, v) {
-                $.each(v, function(k, v) {
+            $.each(value.children, function (k, v) {
+                $.each(v, function (k, v) {
                     weight += moment(convertToDate(v.end, false)).diff(convertToDate(v.start, true));
                 })
             });
@@ -106,9 +106,9 @@ function drawSchedule(file, title, containerID, criticalPath) {
             var localMaxDate = Number.MIN_SAFE_INTEGER;
 
             //--- Append all Childs
-            $.each(value.children, function(k, v) {
+            $.each(value.children, function (k, v) {
                 var dependencyId = null;
-                $.each(v, function(k, v) {
+                $.each(v, function (k, v) {
 
                     //--- Converting start & end point to Date
                     var s = convertToDate(v.start, true), e = convertToDate(v.end, false);
@@ -136,7 +136,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
 
                     //--- Only store if we wanna draw the critical path, otherwise
                     // we can just ignore it
-                    if(criticalPath) {
+                    if (criticalPath) {
                         dependencyId = v.title;
                     }
                 });
@@ -211,7 +211,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                     color: fontColor
                 },
                 events: {
-                    load: function(event) {
+                    load: function (event) {
                         //--- Ignore the first load, because this gets fired eventhough it didn't finish loading yet
                         if (ignoreFirstLoad) {
                             ignoreFirstLoad = false;
@@ -236,7 +236,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                     color: fontColor
                 }
             },
-            xAxis:{
+            xAxis: {
                 currentDateIndicator: true,
                 min: minDate,
                 max: maxDate,
@@ -251,8 +251,8 @@ function drawSchedule(file, title, containerID, criticalPath) {
                     style: {
                         color: fontColor
                     },
-                    formatter: function() {
-                        if(highlights.includes(this.value)) {
+                    formatter: function () {
+                        if (highlights.includes(this.value)) {
                             return '<b>' + this.value + '</b>';
                         }
                         return this.value;
@@ -265,7 +265,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 },
                 itemHoverStyle: {
                     color: '#C3F2FF',
-	                'text-shadow': '0 0 46px rgba(13, 71, 203, 0.57), 0 0 13px rgba(0, 112, 202, 0.75);'
+                    'text-shadow': '0 0 46px rgba(13, 71, 203, 0.57), 0 0 13px rgba(0, 112, 202, 0.75);'
                 }
             },
             credits: {
@@ -277,7 +277,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                     height: '50%'
                 },
                 useHTML: true,
-                formatter: function() {
+                formatter: function () {
                     var tooltipContent = '<b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i>';
                     if (!(this.point.detailID === undefined)) {
 
@@ -287,7 +287,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                         var detail = detailMap[this.point.detailID];
 
                         $.each(detail.content, function (k, value) {
-                            tooltipContent += (firstContentAdd || detail.sections ? '' : '<br />') + value.title + ' ' + value.text;
+                            tooltipContent += (firstContentAdd || detail.sections ? '' : '<br />') + value.data;
 
                             if (detail.sections === true && !(k === detail.content.length - 1)) {
                                 tooltipContent += '<hr />';
@@ -302,8 +302,8 @@ function drawSchedule(file, title, containerID, criticalPath) {
             plotOptions: {
                 series: {
                     dataLabels: {
-                        formatter: function() {
-                            if(this.point.completed === undefined) {
+                        formatter: function () {
+                            if (this.point.completed === undefined) {
                                 return;
                             }
                             return Highcharts.numberFormat(this.point.completed.amount * 100, 2) + '% progress in all sub tasks';
@@ -319,11 +319,11 @@ function drawSchedule(file, title, containerID, criticalPath) {
 }
 
 //--- Switching Schedules
-$('#schedules').on('click', 'a', function() {
+$('#schedules').on('click', 'a', function () {
 
     var containerID = $(this).attr('id') + '-graph';
 
-    $('#containers > div').each(function() {
+    $('#containers > div').each(function () {
         $(this).hide();
     });
 

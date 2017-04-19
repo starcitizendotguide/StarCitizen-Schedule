@@ -3,8 +3,7 @@
     "id": "entity-owner-manager",
     "content": [
       {
-        "title": "<b>Description:</b>",
-        "text": "The Entity Owner Manager will track entities that are moved around the universe, making sure we spawn and unspawn them at the correct time."
+        "data": "<b>Description:</b> The Entity Owner Manager will track entities that are moved around the universe, making sure we spawn and unspawn them at the correct time."
       }
     ]
   },
@@ -12,8 +11,7 @@
     "id": "render-to-texture",
     "content": [
       {
-        "title": "<b>Description:</b>",
-        "text": "This will have many uses going forwards, but our focus for now is to improve UI rendering and to introduce live rendering of video communications. We’re aiming to improve rendering performance by rendering as much of the UI ahead of a frame. For video communications, this will mean that we don’t have to pre-render the comms and store those files on the hard drive, as is the case with most games, allowing us to maintain fidelity and save hard drive space."
+        "data": "<b>Description:</b> This will have many uses going forwards, but our focus for now is to improve UI rendering and to introduce live rendering of video communications. We’re aiming to improve rendering performance by rendering as much of the UI ahead of a frame. For video communications, this will mean that we don’t have to pre-render the comms and store those files on the hard drive, as is the case with most games, allowing us to maintain fidelity and save hard drive space."
       }
     ]
   },
@@ -21,8 +19,7 @@
     "id": "diffusion-subset",
     "content": [
       {
-        "title": "<b>Description:</b>",
-        "text": "Diffusion is our second-generation cloud-oriented back-end service architecture. It dramatically simplifies the effort required to implement, maintain, and interact with services, while simultaneously providing major enhancements in the areas of scalability and redundancy."
+        "data": "<b>Description:</b> Diffusion is our second-generation cloud-oriented back-end service architecture. It dramatically simplifies the effort required to implement, maintain, and interact with services, while simultaneously providing major enhancements in the areas of scalability and redundancy."
       }
     ]
   },
@@ -30,8 +27,7 @@
     "id": "network-bind-unbind",
     "content": [
       {
-        "title": "<b>Description:</b>",
-        "text": "Eliminate network updates for entities far away from clients. Should greatly reduce the amount of work the netcode has to do, helping improve server performance. A greater proportion of client bandwidth will be spent on entities close to the client."
+        "data": "<b>Description:</b> Eliminate network updates for entities far away from clients. Should greatly reduce the amount of work the netcode has to do, helping improve server performance. A greater proportion of client bandwidth will be spent on entities close to the client."
       }
     ]
   },
@@ -40,16 +36,13 @@
     "sections": true,
     "content": [
       {
-        "title": "<b>Yela:</b>",
-        "text": "Yela is the most frigid of the Crusader moons. Those bold (or careless) enough to step outside without a spacesuit will be killed instantly by its freezing temperatures. If the cold doesn’t kill you, than any of the treacherous crevasses that crisscross the planet might. Cyrovolcanos have been known to erupt unexpectedly from such crevasses, so be wary when flying at low altitudes. Despite all its danger, there is much beauty to be found on Yela, like the underwater caves hidden beneath the moon’s crust. <img src=\"https://robertsspaceindustries.com/media/5yqbc0y8ugvimr/post/Yela_2.gif\" />"
+        "data": "<b>Yela:</b> Yela is the most frigid of the Crusader moons. Those bold (or careless) enough to step outside without a spacesuit will be killed instantly by its freezing temperatures. If the cold doesn’t kill you, than any of the treacherous crevasses that crisscross the planet might. Cyrovolcanos have been known to erupt unexpectedly from such crevasses, so be wary when flying at low altitudes. Despite all its danger, there is much beauty to be found on Yela, like the underwater caves hidden beneath the moon’s crust. <img src=\"https://robertsspaceindustries.com/media/5yqbc0y8ugvimr/post/Yela_2.gif\" />"
       },
       {
-        "title": "<b>Cellin:</b>",
-        "text": "Burning with volcanic activity, Cellin is the counter to her icy sister. Although the volcanoes have been dormant for hundreds of years, the surface is dotted with thermal geysers that erupt without notice. The largest of such geysers can destroy heavy vehicles. Highly corrosive clouds of gas are regularly released from the moon’s surface, creating low visibility and damaging anything caught outside."
+        "data": "<b>Cellin:</b> Burning with volcanic activity, Cellin is the counter to her icy sister. Although the volcanoes have been dormant for hundreds of years, the surface is dotted with thermal geysers that erupt without notice. The largest of such geysers can destroy heavy vehicles. Highly corrosive clouds of gas are regularly released from the moon’s surface, creating low visibility and damaging anything caught outside."
       },
       {
-        "title": "<b>Daymar:</b>",
-        "text": "Daymar’s surface is like a harmonic blend of Yela and Cellin. It’s mountainous surface is reminiscent of Cellin’s volcanoes, while its craters share a warm likeness to Yela’s frozen crevessases. Known for its dense atmosphere, thick fog and a loose dirt surface makes travel difficult. Lightning storms can help illuminate the fog, just don’t get struck by their flash. <img src=\"https://robertsspaceindustries.com/media/4bz8ruvxgqcecr/post/Daymar_2.gif\"/>"
+        "data": "<b>Daymar:</b> Daymar’s surface is like a harmonic blend of Yela and Cellin. It’s mountainous surface is reminiscent of Cellin’s volcanoes, while its craters share a warm likeness to Yela’s frozen crevessases. Known for its dense atmosphere, thick fog and a loose dirt surface makes travel difficult. Lightning storms can help illuminate the fog, just don’t get struck by their flash. <img src=\"https://robertsspaceindustries.com/media/4bz8ruvxgqcecr/post/Daymar_2.gif\"/>"
       }
     ]
   }
