@@ -30,7 +30,7 @@ $(document).ready(function() {
 
         $.each(details, function (k, detail) {
                
-            detailMap[detail.id] = detail.content;
+            detailMap[detail.id] = detail;
 
         });
 
@@ -273,17 +273,25 @@ function drawSchedule(file, title, containerID, criticalPath) {
             },
             tooltip: {
                 style: {
-                    width: '400%'
+                    width: '500%'
                 },
                 useHTML: true,
                 formatter: function() {
                     var tooltipContent = '<b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i>';
-
                     if (!(this.point.detailID === undefined)) {
+
                         tooltipContent += '<hr />';
+
                         var firstContentAdd = true;
-                        $.each(detailMap[this.point.detailID], function (k, value) {
-                            tooltipContent += (firstContentAdd ? '' : '<br />') + value.title + ' ' + value.text;
+                        var detail = detailMap[this.point.detailID];
+
+                        $.each(detail.content, function (k, value) {
+                            tooltipContent += (firstContentAdd || detail.sections ? '' : '<br />') + value.title + ' ' + value.text;
+
+                            if (detail.sections === true && !(k === detail.content.length - 1)) {
+                                tooltipContent += '<hr />';
+                            }
+
                             firstContentAdd = false;
                         });
                     }

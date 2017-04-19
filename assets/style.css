@@ -12,8 +12,22 @@ body {
     font-family: 'Electrolize';
     background: url('img/background.jpg') repeat;
 }
+
+hr {
+    color: #6ABBCF;
+}
+
 .grid {
     background: transparent url('img/gridbg_glow.png') repeat;
+}
+
+.highcharts-tooltip {
+    text-align:justify;
+}
+
+.highcharts-tooltip img {
+    width: 100%;
+    display: block;
 }
 
 #containers {
