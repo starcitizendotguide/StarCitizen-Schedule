@@ -277,11 +277,10 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 enabled: true
             },
             tooltip: {
-                style: {
-                    width: '500%',
-                    height: '50%'
-                },
                 useHTML: true,
+                style: {
+                    width: '500%'
+                },
                 formatter: function () {
                     var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i></div>';
 
@@ -301,7 +300,9 @@ function drawSchedule(file, title, containerID, criticalPath) {
 
                             firstContentAdd = false;
                         });
+
                     }
+
                     return tooltipContent;
                 }
             },
