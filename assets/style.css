@@ -14,26 +14,46 @@ body {
     background: url('img/background.jpg') repeat;
 }
 
-hr {
-    color: #6ABBCF;
-}
-
 .grid {
     background: transparent url('img/gridbg_glow.png') repeat;
 }
 
-.highcharts-tooltip span {
-    text-align: justify;
+/**
+*    Not CIGs CSS stuff
+*/
+hr {
+    color: #6ABBCF;
 }
 
-.highcharts-tooltip img {
+.tooltipster-content {
     max-width: 100%;
-    display: block;
+    background-color: #dcdddf;
+    color: yellow;
 }
 
-.highcharts-tooltip .info-box-title {
+.info-box-content {
+    font-size: 12px;
+    text-align: justify;
+    font-family: Electrolize;
+    color: #606465;
+}
+
+.info-box-content img {
+    display: block;
+    width: 100%;
+}
+
+.info-box-title {
+    color: #606465;
+    font-size: 12px;
+    width: 100%;
     text-align: center;
     text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.tooltip_templates {
+    display: none;
 }
 
 #containers {
@@ -115,10 +135,6 @@ hr {
     }
 }
 
-
-/**
-*    Not CIGs CSS stuff
-*/
 nav {
     float: left;
 }
