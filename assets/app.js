@@ -1,6 +1,5 @@
 //--- DEVELOPER SETTINGS
-var CONTENT_SYSTEM_ENABLED = false;
-
+var CONTENT_SYSTEM_ENABLED = !(getUrlParameter('content_system') === undefined);
 
 //--- Some Methods
 function convertToDate(date, start) {
@@ -11,6 +10,24 @@ function convertToDate(date, start) {
 function convertContentToContainer(containerID) {
     return containerID.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
 }
+
+/**
+ * http://stackoverflow.com/a/21903119
+ */
+function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+};
 
 //--- We are storing this to display the first graph when everything else is done and the
 // page is ready to be shown.
