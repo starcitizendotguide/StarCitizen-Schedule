@@ -1,5 +1,5 @@
 //--- DEVELOPER SETTINGS
-var CONTENT_SYSTEM_ENABLED = false;
+var CONTENT_SYSTEM_ENABLED = !(getUrlParameter('content_system') === undefined);
 
 //--- Some Methods
 function convertToDate(date, start) {
@@ -298,7 +298,34 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 enabled: true
             },
             tooltip: {
-                enabled: false
+                enabled: true,
+                useHTML: true,
+                formatter: function () {
+                    var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i></div>';
+
+                    if (!(this.point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
+
+                        tooltipContent += '<div class="info-box-content"><hr />';
+
+                        var firstContentAdd = true;
+                        var detail = detailMap[this.point.detailID];
+
+                        $.each(detail.content, function (k, value) {
+                            tooltipContent += (firstContentAdd || detail.sections ? '' : '<br />') + value.data;
+
+                            if (detail.sections === true && !(k === detail.content.length - 1)) {
+                                tooltipContent += '<hr />';
+                            }
+
+                            firstContentAdd = false;
+                        });
+
+                        tooltipContent += '</div>';
+
+                    }
+
+                    return tooltipContent;
+                }
             },
             plotOptions: {
                 series: {
@@ -308,78 +335,6 @@ function drawSchedule(file, title, containerID, criticalPath) {
                                 return;
                             }
                             return Highcharts.numberFormat(this.point.completed.amount * 100, 2) + '% progress in all sub tasks';
-                        }
-                    },
-                    point: {
-                        events: {
-                            mouseOver: function (event) {
-                                var target = event.target;
-
-                                //---
-                                var targetElement = $(target.graphic.element);
-
-                                if (targetElement.hasClass('tooltip')) {
-                                    return;
-                                }
-
-                                targetElement.addClass('tooltip');
-
-                                if (!(target.dataLabel === undefined)) {
-                                    var targetElementText = $(target.dataLabel.element);
-                                    targetElementText.addClass('tooltip');
-                                }
-
-                                //---
-                                var tooltipContent = '<b>' + this.options.taskName + '</b> | <i>' + moment(this.options.start).format('MMMM Do, YYYY') + ' - ' + moment(this.options.end).format('MMMM Do, YYYY') + '</i>';
-
-                                if (!(this.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
-                                tooltipContent = '<div class="info-box">';
-                                tooltipContent += '<div class="info-box-title"><b>' + this.options.taskName + '</b> | <i>' + moment(this.options.start).format('MMMM Do, YYYY') + ' - ' + moment(this.options.end).format('MMMM Do, YYYY') + '</i></div>';
-
-                                    tooltipContent += '<div class="info-box-content"><hr />';
-
-                                    var firstContentAdd = true;
-                                    var detail = detailMap[this.detailID];
-
-                                    $.each(detail.content, function (k, value) {
-                                        tooltipContent += (firstContentAdd || detail.sections ? '' : '<br />') + value.data;
-
-                                        if (detail.sections === true && !(k === detail.content.length - 1)) {
-                                            tooltipContent += '<hr />';
-                                        }
-
-                                        firstContentAdd = false;
-                                    });
-
-                                    tooltipContent += '</div>';
-                                    tooltipContent += '</div>';
-                                }
-
-                                //--- Set Content
-                                $('#tooltip_content').html(tooltipContent);
-
-                                //--- Enable Tooltip
-                                $('.tooltip').tooltipster({
-                                    contentCloning: true,
-                                    content: $('#tooltip_content'),
-                                    delay: 400,
-                                    animation: 'fade'
-                                });
-                                $('.tooltip').tooltipster('instance').open();
-
-                            },
-                            mouseOut: function (event) {
-                                var target = event.target;
-
-                                //---
-                                var targetElement = $(target.graphic.element);
-                                targetElement.removeClass('tooltip');
-
-                                if (!(target.dataLabel === undefined)) {
-                                    var targetElementText = $(target.dataLabel.element);
-                                    targetElementText.removeClass('tooltip');
-                                }
-                            }
                         }
                     }
                 }

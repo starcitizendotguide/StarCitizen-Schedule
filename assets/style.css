@@ -25,113 +25,6 @@ hr {
     color: #6ABBCF;
 }
 
-.tooltipster-box {
-    max-width: 20%;
-}
-
-.tooltipster-box .tooltipster-content {
-    stroke-width: 1px;
-    color: #333333;
-    background-color: #f7f7f7;
-    opacity: 0.85;
-    text-align: justify;
-}
-
-.info-box {
-    color: #333333;
-}
-
-    .info-box .info-box-title {
-        text-align: center;
-        text-transform: uppercase;
-        font-size: 0.85em;
-        white-space: nowrap; 
-    }
-
-    .info-box .info-box-content {
-        text-align: justify;
-        font-size: 12px;
-    }
-
-    .info-box img {
-        width: 100%;
-        display: block;
-    }
-
-/*
-.tooltipster-content {
-    max-width: 35%;
-    height: 100%;
-}
-
-    .info-box {
-        width: 100%;
-        cursor: default;
-        pointer-events: none;
-        transition: stroke 150ms;
-    }
-    .info-box .info-box-title {
-        fill: #333333;
-        white-space: nowrap;
-        text-align: center;
-    }
-
-    .info-box .info-box-content {
-        width: 100%;
-        height: 100%;
-        font-size: 0.85em;
-        stroke-width: 1px;
-        fill: #f7f7f7;
-        fill-opacity: 0.4;
-        text-align: justify;
-    }
-
-        .info-box-content img {
-            display: block;
-            width: 100%;
-        }*/
-
-/*
-.info-box {
-    max-width: 40%;
-    cursor: default;
-    pointer-events: none;
-    transition: stroke 150ms;
-    stroke-width: 1px;
-    fill: #f7f7f7;
-    fill-opacity: 0.85;
-}
-
-    .info-box text {
-        fill: #333333;
-    }
-
-    .info-box .info-box-title {
-        color: #606465;
-        font-size: 0.85em;
-        width: 100%;
-        text-align: center;
-        text-transform: uppercase;
-        white-space: nowrap;
-    }
-
-    .info-box .info-box-content {
-        font-size: 12px;
-        text-align: justify;
-        font-family: Electrolize;
-        color: #606465;
-    }
-
-        .info-box .info-box-content img {
-            display: block;
-            width: 100%;
-        }*/
-
-
-.tooltip_templates {
-    display: none;
-}
-
 #containers {
     width: 100%;
 }
@@ -211,6 +104,7 @@ hr {
     }
 }
 
+/* MENUE */
 nav {
     float: left;
 }
@@ -228,4 +122,21 @@ nav ul li a {
     display: block;
     padding: 15px 25px;
     color: #3fc9e1;
+}
+
+/* TOOLTIP */
+.highcharts-tooltip-box {
+    max-width: 40%;
+}
+
+.highcharts-tooltip .info-box-title {
+    text-align: center;
+    text-transform: uppercase;
+    width: 100%;
+}
+
+.highcharts-tooltip .info-box-content {
+    white-space: normal;
+    text-align: justify;
+    width: 100%;
 }
