@@ -1,5 +1,5 @@
 //--- DEVELOPER SETTINGS
-var CONTENT_SYSTEM_ENABLED = true;
+var CONTENT_SYSTEM_ENABLED = false;
 
 //--- Some Methods
 function convertToDate(date, start) {
@@ -330,9 +330,11 @@ function drawSchedule(file, title, containerID, criticalPath) {
                                 }
 
                                 //---
-                                var tooltipContent = '<div class="info-box-title"><b>' + this.options.taskName + '</b> | <i>' + moment(this.options.start).format('MMMM Do, YYYY') + ' - ' + moment(this.options.end).format('MMMM Do, YYYY') + '</i></div>';
+                                var tooltipContent = '<b>' + this.options.taskName + '</b> | <i>' + moment(this.options.start).format('MMMM Do, YYYY') + ' - ' + moment(this.options.end).format('MMMM Do, YYYY') + '</i>';
 
                                 if (!(this.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
+                                tooltipContent = '<div class="info-box">';
+                                tooltipContent += '<div class="info-box-title"><b>' + this.options.taskName + '</b> | <i>' + moment(this.options.start).format('MMMM Do, YYYY') + ' - ' + moment(this.options.end).format('MMMM Do, YYYY') + '</i></div>';
 
                                     tooltipContent += '<div class="info-box-content"><hr />';
 
@@ -350,7 +352,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                                     });
 
                                     tooltipContent += '</div>';
-
+                                    tooltipContent += '</div>';
                                 }
 
                                 //--- Set Content
@@ -360,7 +362,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                                 $('.tooltip').tooltipster({
                                     contentCloning: true,
                                     content: $('#tooltip_content'),
-                                    delay: 200,
+                                    delay: 400,
                                     animation: 'fade'
                                 });
                                 $('.tooltip').tooltipster('instance').open();
