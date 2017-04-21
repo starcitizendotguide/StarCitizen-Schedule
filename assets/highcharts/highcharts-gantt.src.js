@@ -26083,11 +26083,12 @@
                 this.paths = [];
 
                 // Recalculate paths/obstacles on chart redraw
-                addEvent(chart, 'redraw', function () {
+                /*addEvent(chart, 'redraw', function () {
                     var pathfinder = this.pathfinder,
                         animDuration = this.renderer.globalAnimation &&
                             H.animObject(this.renderer.globalAnimation).duration;
 
+                    console.log(this);
                     // Clear immediately
                     pathfinder.clear();
 
@@ -26095,7 +26096,7 @@
                     this.pathfinder.updateTimeout = H.syncTimeout(function () {
                         pathfinder.update();
                     }, animDuration);
-                });
+                });*/
             },
 
             /**

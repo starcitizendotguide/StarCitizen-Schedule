@@ -1,5 +1,6 @@
 //--- DEVELOPER SETTINGS
 var CONTENT_SYSTEM_ENABLED = !(getUrlParameter('content_system') === undefined);
+var CRITICAL_PATH_ENABLED = false;
 
 //--- Some Methods
 function convertToDate(date, start) {
@@ -76,7 +77,7 @@ $(document).ready(function () {
                 drawFirst = true;
             }
 
-            drawSchedule(index.files[0] /*TODO*/, index.name, containerID, false);
+            drawSchedule(index.files[0] /*TODO*/, index.name, containerID, CRITICAL_PATH_ENABLED);
 
         });
 
@@ -339,9 +340,11 @@ function drawSchedule(file, title, containerID, criticalPath) {
                     }
                 }
             },
-            /*TODO exporting: {
-                fallbackToExportServer: false
-            }*/
+            exporting: {
+                fallbackToExportServer: false,
+                filename: title,
+                printMaxWidth: 1920
+            }
         });
     });
 }
