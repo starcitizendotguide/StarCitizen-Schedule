@@ -247,6 +247,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
 
                         //--- We only wanna kick this in once and ignore all other graphs.
                         if (drawFirst) {
+                            console.log('draw');
                             $('#loading').hide();
 
                             $('#schedules').fadeIn('slow');
