@@ -226,7 +226,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
         });
 
         //--- Some settings
-        var ignoreFirstLoad = true;
+        var ignoreFirstLoad = false /* TODO: Change when more than one schedule loaded */;
         var fontColor = '#3FC9E1';
 
         Highcharts.ganttChart(containerID, {
@@ -303,6 +303,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 enabled: true,
                 useHTML: true,
                 formatter: function () {
+                    console.log(this);
                     var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i></div>';
 
                     if (!(this.point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
