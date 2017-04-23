@@ -48,6 +48,7 @@
   },
   {
     "id": "ships-drake-dragonfly",
+    "enabled": false,
     "content": [
       {
         "data": "<img src=\"assets/img/details/ships-drake-dragonfly.jpg\"/>"
@@ -56,6 +57,7 @@
   },
   {
     "id": "ships-drake-cutlass-black",
+    "enabled": false,
     "content": [
       {
         "data": "<img src=\"assets/img/details/ships-drake-cutlass-black.jpg\"/>"
@@ -64,6 +66,7 @@
   },
   {
     "id": "ships-rsi-constellation-aquilla",
+    "enabled": false,
     "content": [
       {
         "data": "<img src=\"assets/img/details/ships-rsi-constellation-aquilla.jpg\"/>"
@@ -72,6 +75,7 @@
   },
   {
     "id": "ships-misc-prospector",
+    "enabled": false,
     "content": [
       {
         "data": "<img src=\"assets/img/details/ships-misc-prospector.jpg\"/>"
@@ -80,6 +84,7 @@
   },
   {
     "id": "weapons-p8-sc",
+    "enabled": false,
     "content": [
       {
         "data": "<img src=\"assets/img/details/weapons-p8-sc.jpg\"/>"
@@ -88,6 +93,7 @@
   },
   {
     "id": "environments-surface-outposts",
+    "enabled": false,
     "content": [
       {
         "data": "<img src=\"assets/img/details/environments-surface-outposts.jpg\"/>"

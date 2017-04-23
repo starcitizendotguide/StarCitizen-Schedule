@@ -1,5 +1,5 @@
 //--- DEVELOPER SETTINGS
-var CONTENT_SYSTEM_ENABLED = !(getUrlParameter('content_system') === undefined);
+var CONTENT_SYSTEM_ENABLED = true /*!(getUrlParameter('content_system') === undefined)*/;
 var CRITICAL_PATH_ENABLED = !(getUrlParameter('critical_path') === undefined);
 
 //--- Some Methods
@@ -320,22 +320,24 @@ function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
 
                     if (!(this.point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
 
-                        tooltipContent += '<div class="info-box-content"><hr />';
-
-                        var firstContentAdd = true;
                         var detail = detailMap[this.point.detailID];
 
-                        $.each(detail.content, function (k, value) {
-                            tooltipContent += (firstContentAdd || detail.sections ? '' : '<br />') + value.data;
+                        if ((!(detail.enabled === undefined) && detail.enabled === true) || detail.enabled === undefined){
+                            var firstContentAdd = true;
+                            tooltipContent += '<div class="info-box-content"><hr />';
 
-                            if (detail.sections === true && !(k === detail.content.length - 1)) {
-                                tooltipContent += '<hr />';
-                            }
+                            $.each(detail.content, function (k, value) {
+                                tooltipContent += (firstContentAdd || detail.sections ? '' : '<br />') + value.data;
 
-                            firstContentAdd = false;
-                        });
+                                if (detail.sections === true && !(k === detail.content.length - 1)) {
+                                    tooltipContent += '<hr />';
+                                }
 
-                        tooltipContent += '</div>';
+                                firstContentAdd = false;
+                            });
+
+                            tooltipContent += '</div>';
+                        }
 
                     }
 
