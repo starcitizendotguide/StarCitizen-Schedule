@@ -1,9 +1,22 @@
-[
-  {
-    "name": "3.0 Schedule",
-    "files": [
-      "3.0-schedule-1.json",
-      "3.0-schedule.json"
-    ]
-  }
-]
+{
+  "schedules": [
+    {
+      "name": "3.0 Schedule",
+      "files": [
+        "3.0-schedule-1.json",
+        "3.0-schedule.json"
+      ]
+    }
+  ],
+  "legend": [
+    "#2C3E50",
+    "#E74C3C",
+    "#730046",
+    "#3498DB",
+    "#468966",
+    "#FFB03B",
+    "#CC4452",
+    "#B1E001",
+    "#332532"
+  ]
+}

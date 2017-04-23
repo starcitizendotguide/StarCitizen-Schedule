@@ -143,3 +143,8 @@ nav ul li a {
     text-align: justify;
     width: 100%;
 }
+
+/* PROGRESSBAR */
+.highcharts-point .highcharts-partfill-overlay {
+    fill: #1acf00;
+}

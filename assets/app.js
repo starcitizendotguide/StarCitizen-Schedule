@@ -1,6 +1,6 @@
 //--- DEVELOPER SETTINGS
 var CONTENT_SYSTEM_ENABLED = !(getUrlParameter('content_system') === undefined);
-var CRITICAL_PATH_ENABLED = false;
+var CRITICAL_PATH_ENABLED = !(getUrlParameter('critical_path') === undefined);
 
 //--- Some Methods
 function convertToDate(date, start) {
@@ -30,6 +30,10 @@ function getUrlParameter(sParam) {
     }
 };
 
+function getColor(index) {
+    return legendColors[index % legendColors.length];
+}
+
 //--- We are storing this to display the first graph when everything else is done and the
 // page is ready to be shown.
 var firstGraphToDraw = null;
@@ -37,6 +41,9 @@ var drawFirst = false;
 
 //--- Map to store the details
 var detailMap = [];
+
+//--- Color array
+var legendColors = [];
 
 //--- Draw Schedules
 $(document).ready(function () {
@@ -56,10 +63,15 @@ $(document).ready(function () {
 
     });
 
-    //--- Load & Draw All Schedules
-    $.getJSON('assets/data/index.json', { _: new Date().getTime() }, function (indicies) {
 
-        $.each(indicies, function (k, index) {
+    //--- Load & Draw All Schedules
+    $.getJSON('assets/data/index.json', { _: new Date().getTime() }, function (entries) {
+        
+        //--- Colors
+        $.each(entries.legend, function (k, color) { legendColors.push(color); });
+
+        //--- Schedules
+        $.each(entries.schedules, function (k, index) {
 
             //--- Create content id
             var contentID = convertContentToContainer(index.name);
@@ -72,12 +84,12 @@ $(document).ready(function () {
             $('#containers').append('<div style="width: 98%;" id="' + containerID + '"></div>')
 
             //--- Draw schedule
-            if (k === indicies.length - 1) {
+            if (k === entries.schedules.length - 1) {
                 //--- Loading done when we arrived at the last schedule
                 drawFirst = true;
             }
 
-            drawSchedule(index.files[0] /*TODO*/, index.name, containerID, CRITICAL_PATH_ENABLED);
+            drawSchedule(index.files[0] /*TODO*/, index.name, containerID, CRITICAL_PATH_ENABLED, (entries.schedules.length > 1));
 
         });
 
@@ -89,7 +101,7 @@ $(document).ready(function () {
 
 });
 
-function drawSchedule(file, title, containerID, criticalPath) {
+function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
 
     $.getJSON('assets/data/schedules/' + file, { _: new Date().getTime() }, function (data) {
 
@@ -105,12 +117,13 @@ function drawSchedule(file, title, containerID, criticalPath) {
         var projectProgress = [];
 
         //--- Parse the Data
-        $.each(data, function (key, value) {
+        $.each(data, function (index, value) {
 
             //--- Data Building for our default Gantt Diagramm
             var tmp = {
-                'name': value.title,
-                'data': []
+                name: value.title,
+                color: getColor(index),
+                data: []
             };
 
             //--- Overall sub task progress
@@ -155,6 +168,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
                         parent: value.title,
                         dependency: dependencyId,
                         detailID: v.detailID,
+                        color: getColor(index)
                     });
 
                     if (!(v.detailID === undefined) && detailMap[v.detailID] === undefined) {
@@ -226,7 +240,7 @@ function drawSchedule(file, title, containerID, criticalPath) {
         });
 
         //--- Some settings
-        var ignoreFirstLoad = false /* TODO: Change when more than one schedule loaded */;
+        var ignoreFirstLoad = ignoreFirst;
         var fontColor = '#3FC9E1';
 
         Highcharts.ganttChart(containerID, {
