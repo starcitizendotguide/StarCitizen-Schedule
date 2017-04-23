@@ -247,7 +247,6 @@ function drawSchedule(file, title, containerID, criticalPath) {
 
                         //--- We only wanna kick this in once and ignore all other graphs.
                         if (drawFirst) {
-                            console.log('draw');
                             $('#loading').hide();
 
                             $('#schedules').fadeIn('slow');
@@ -303,7 +302,6 @@ function drawSchedule(file, title, containerID, criticalPath) {
                 enabled: true,
                 useHTML: true,
                 formatter: function () {
-                    console.log(this);
                     var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i></div>';
 
                     if (!(this.point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
