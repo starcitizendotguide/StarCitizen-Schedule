@@ -349,7 +349,13 @@ function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
                             if (this.point.completed === undefined) {
                                 return;
                             }
-                            return Highcharts.numberFormat(this.point.completed.amount * 100, 2) + '% progress in all sub tasks';
+
+                            var progress = Highcharts.numberFormat(this.point.completed.amount * 100, 2);
+
+                            if (this.key == this.series.chart.title.textStr) {
+                                return (progress + '% OF THE SCHEDULE COMPLETED');
+                            } 
+                            return  (progress + '% progress in all sub tasks');
                         }
                     }
                 }
