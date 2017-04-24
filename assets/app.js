@@ -116,8 +116,16 @@ function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
         //--- Overall progress
         var projectProgress = [];
 
+        //--- Data
+        var dataEntry = null;
+
         //--- Parse the Data
         $.each(data, function (index, value) {
+
+            if (value.title === '__DATA__') {
+                dataEntry = value;
+                return;
+            }
 
             //--- Data Building for our default Gantt Diagramm
             var tmp = {
@@ -223,21 +231,57 @@ function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
             projectTotalProgress += (entry.weight / projectTotalWeight * entry.progress);
         });
 
-        highlights.push(title);
-        seriesData.unshift({
+        //--- Main Entry with some data
+        var mainEntry = {
             name: title,
             data: [
                 {
+                    id: title,
                     taskName: title,
                     start: minDate,
                     end: maxDate,
                     completed: {
                         amount: parseFloat(projectTotalProgress.toFixed(4)),
-                        fill: '#40e6f0'
                     }
                 }
             ]
-        });
+        };
+        if (!(dataEntry.evocati === undefined)) {
+            mainEntry.data.push({
+                parent: title,
+                taskName: 'Evocati - Release Date',
+                start: convertToDate(dataEntry.evocati, true),
+                parent: title,
+                milestone: true
+            });
+
+            maxDate = Math.max(convertToDate(dataEntry.evocati, false), maxDate);
+        }
+        if (!(dataEntry.ptu === undefined)) {
+            mainEntry.data.push({
+                parent: title,
+                taskName: 'PTU - Release Date',
+                start: convertToDate(dataEntry.ptu, true),
+                parent: title,
+                milestone: true
+            });
+
+            maxDate = Math.max(convertToDate(dataEntry.ptu, false), maxDate);
+        }
+        if (!(dataEntry.public === undefined)) {
+            mainEntry.data.push({
+                parent: title,
+                taskName: 'Public - Release Date',
+                start: convertToDate(dataEntry.public, true),
+                parent: title,
+                milestone: true
+            });
+
+            maxDate = Math.max(convertToDate(dataEntry.public, false), maxDate);
+        }
+
+        highlights.push(title);
+        seriesData.unshift(mainEntry);
 
         //--- Some settings
         var ignoreFirstLoad = ignoreFirst;
