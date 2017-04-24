@@ -101,10 +101,34 @@
     ]
   },
   {
+    "id": "solar-system-shop-service-3-0",
+    "content": [
+      {
+        "data": "<b>Description:</b> The Solar System Shop Service dictates what retail products, natural resources, and services shops are willing to buy and sell. It also decides their current level of inventory and prices, all of which may vary over time. It acts as an intermediary between the game and the back end simulation/rule set."
+      }
+    ]
+  },
+  {
+    "id": "solar-system-mission-service-3-0",
+    "content": [
+      {
+        "data": "The Solar System Mission Service dictates what missions are being offered at various locations and at what price. It is also responsible for specifying when and where dynamic content should be instantiated and how it should be customized. That way, the reality players see matches what it should in that area, based upon hints provided by the back end simulation/rule set. This service will split into two for 3.1, with the latter functionality becoming the responsibility of a dedicated Dynamic Content Service."
+      }
+    ]
+  },
+  {
     "id": "release-ptu",
     "content": [
       {
         "data": "The PTU is a replica environment of all servers needed to operate the game and the platform. This environment exists to allow public testing phases of unreleased patches of the game and platform. This environment will be publicly available to players, but under our tight access control. This way we can, if we want, have an internal playtest of a patch in a release environment without needing to expose it to the public."
+      }
+    ]
+  },
+  {
+    "id": "release-evocati",
+    "content": [
+      {
+        "data": "Our smallest group of testers who help us get our releases ready for a proper public viewing more quickly! Picked from Issue Council posters with multiple submissions or contributions and from our most active PTU testers."
       }
     ]
   }

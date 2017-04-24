@@ -380,14 +380,16 @@
         {
           "title": "Solar System Shop Service",
           "start": "6.4.2017",
-          "end": "21.4.2017"
+          "end": "21.4.2017",
+          "detailID": "solar-system-shop-service-3-0"
         }
       ],
       [
         {
           "title": "Solar System Mission Service",
           "start": "17.4.2017",
-          "end": "12.5.2017"
+          "end": "12.5.2017",
+          "detailID": "solar-system-mission-service-3-0"
         }
       ],
       [
