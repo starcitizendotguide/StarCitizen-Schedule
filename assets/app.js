@@ -360,7 +360,14 @@ function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
                 enabled: true,
                 useHTML: true,
                 formatter: function () {
-                    var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY') + ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i></div>';
+
+                    var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY');
+
+                    if (this.point.parent == title) {
+                        return tooltipContent;
+                    }
+
+                    tooltipContent += ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i></div>';
 
                     if (!(this.point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
 

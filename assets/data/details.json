@@ -99,5 +99,13 @@
         "data": "<img src=\"assets/img/details/environments-surface-outposts.jpg\"/>"
       }
     ]
+  },
+  {
+    "id": "release-ptu",
+    "content": [
+      {
+        "data": "The PTU is a replica environment of all servers needed to operate the game and the platform. This environment exists to allow public testing phases of unreleased patches of the game and platform. This environment will be publicly available to players, but under our tight access control. This way we can, if we want, have an internal playtest of a patch in a release environment without needing to expose it to the public."
+      }
+    ]
   }
 ]
