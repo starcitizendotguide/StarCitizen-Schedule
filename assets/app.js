@@ -246,38 +246,41 @@ function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
                 }
             ]
         };
-        if (!(dataEntry.evocati === undefined)) {
-            mainEntry.data.push({
-                parent: title,
-                taskName: 'Evocati - Release Date',
-                start: convertToDate(dataEntry.evocati, true),
-                parent: title,
-                milestone: true
-            });
 
-            maxDate = Math.max(convertToDate(dataEntry.evocati, false), maxDate);
-        }
-        if (!(dataEntry.ptu === undefined)) {
-            mainEntry.data.push({
-                parent: title,
-                taskName: 'PTU - Release Date',
-                start: convertToDate(dataEntry.ptu, true),
-                parent: title,
-                milestone: true
-            });
+        if (!(dataEntry === undefined)) {
+            if (!(dataEntry.evocati === undefined)) {
+                mainEntry.data.push({
+                    parent: title,
+                    taskName: 'Evocati - Release Date',
+                    start: convertToDate(dataEntry.evocati, true),
+                    parent: title,
+                    milestone: true
+                });
 
-            maxDate = Math.max(convertToDate(dataEntry.ptu, false), maxDate);
-        }
-        if (!(dataEntry.public === undefined)) {
-            mainEntry.data.push({
-                parent: title,
-                taskName: 'Public - Release Date',
-                start: convertToDate(dataEntry.public, true),
-                parent: title,
-                milestone: true
-            });
+                maxDate = Math.max(convertToDate(dataEntry.evocati, false), maxDate);
+            }
+            if (!(dataEntry.ptu === undefined)) {
+                mainEntry.data.push({
+                    parent: title,
+                    taskName: 'PTU - Release Date',
+                    start: convertToDate(dataEntry.ptu, true),
+                    parent: title,
+                    milestone: true,
+                });
 
-            maxDate = Math.max(convertToDate(dataEntry.public, false), maxDate);
+                maxDate = Math.max(convertToDate(dataEntry.ptu, false), maxDate);
+            }
+            if (!(dataEntry.public === undefined)) {
+                mainEntry.data.push({
+                    parent: title,
+                    taskName: 'Public - Release Date',
+                    start: convertToDate(dataEntry.public, true),
+                    parent: title,
+                    milestone: true
+                });
+
+                maxDate = Math.max(convertToDate(dataEntry.public, false), maxDate);
+            }
         }
 
         highlights.push(title);
