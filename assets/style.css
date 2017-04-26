@@ -28,7 +28,11 @@ hr {
     color: #6ABBCF;
 }
 
-#containers {
+.containers {
+    max-width: 99%;
+}
+
+.containers .container {
     width: 100%;
 }
 

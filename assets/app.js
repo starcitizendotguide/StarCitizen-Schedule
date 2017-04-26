@@ -81,7 +81,7 @@ $(document).ready(function () {
 
             //--- Append menue & tab
             $('#schedules').append('<li><a href="#" id="' + contentID + '">' + index.name + '</a></li>');
-            $('#containers').append('<div style="width: 98%;" id="' + containerID + '"></div>')
+            $('.containers').append('<div class="container" id="' + containerID + '"></div>')
 
             //--- Draw schedule
             if (k === entries.schedules.length - 1) {
@@ -208,7 +208,8 @@ function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
                 completed: {
                     amount: parseFloat(overallDone.toFixed(4)),
                     fill: '#40e6f0'
-                }
+                },
+                detailID: value.detailID
             });
 
 

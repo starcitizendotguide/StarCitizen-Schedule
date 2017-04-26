@@ -1,9 +1,35 @@
 ﻿[
   {
+    "id": "pu",
+    "content": [
+      {
+        "data": "The Persistent Universe, commonly known as the PU, is a mode of gameplay that allows players to explore the many solar systems (and everything between) that make up the ‘Verse. Here you and your friends can do missions, engage in ship or FPS combat, and explore asteroid fields for long-forgotten wrecks. This has all been built on CIG's 64-bit game engine that provides seamless travel from inside a space station, to a spaceship so large that you and your friends can walk around inside while flying thousands of kilometers through space, all in real time and all without load screens."
+      }
+    ]
+  },
+  {
+    "id": "mission-givers",
+    "content": [
+      {
+        "data": "Mission Givers are the plethora or human, alien, kiosk, or any number of avenues where one might obtain details to begin a mission. Although some Mission Givers may be static in their location and/or prerequisites for being obtained, some Mission Givers may seem someone mundane or obscure, like that discarded piece of trash you absentmindedly kicked as you were heading to a rendezvous point. A message in a bottle just might net your crew their next month’s salary."
+      }
+    ]
+  },
+  {
+    "id": "derelict-ships",
+    "content": [
+      {
+        "data": "Derelict Ships, and space stations alike, are entities throughout the ‘Verse that may contain a wealth of supplies and information, or be ground zero for a ravaging epidemic. Regardless of the contents, a series of scans would go a long way to help decide whether to make the detour to check its content or radio back to a scavenging team."
+      }
+    ]
+  },
+
+
+  {
     "id": "entity-owner-manager",
     "content": [
       {
-        "data": "<b>Description:</b> The Entity Owner Manager will track entities that are moved around the universe, making sure we spawn and despawn them at the correct time."
+        "data": "The Entity Owner Manager will track entities that are moved around the universe, making sure we spawn and despawn them at the correct time."
       }
     ]
   },
@@ -11,7 +37,7 @@
     "id": "render-to-texture",
     "content": [
       {
-        "data": "<b>Description:</b> Render-to Texture will have many uses going forwards, but our focus for now is to improve UI rendering and to introduce live rendering of video communications. We’re aiming to improve rendering performance by rendering as much of the UI ahead of a frame. For video communications, this will mean that we don’t have to pre-render the comms to store those files on the hard drive (as is the case with most games). This will allow us to maintain fidelity as well as save hard drive space."
+        "data": "Render-to Texture will have many uses going forwards, but our focus for now is to improve UI rendering and to introduce live rendering of video communications. We’re aiming to improve rendering performance by rendering as much of the UI ahead of a frame. For video communications, this will mean that we don’t have to pre-render the comms to store those files on the hard drive (as is the case with most games). This will allow us to maintain fidelity as well as save hard drive space."
       }
     ]
   },
@@ -19,7 +45,7 @@
     "id": "diffusion-subset",
     "content": [
       {
-        "data": "<b>Description:</b> Diffusion is our second-generation cloud-oriented back-end service architecture. It dramatically simplifies the effort required to implement, maintain and interact with services, while simultaneously providing major enhancements in the areas of scalability and redundancy."
+        "data": "Diffusion is our second-generation cloud-oriented back-end service architecture. It dramatically simplifies the effort required to implement, maintain and interact with services, while simultaneously providing major enhancements in the areas of scalability and redundancy."
       }
     ]
   },
@@ -27,25 +53,81 @@
     "id": "network-bind-unbind",
     "content": [
       {
-        "data": "<b>Description:</b> Network Binding and Unbinding eliminates network updates for entities far away from clients. This should greatly reduce the amount of work the netcode must do, helping improve server performance. A greater proportion of client bandwidth will be spent on entities closest to the client."
+        "data": "Network Binding and Unbinding eliminates network updates for entities far away from clients. This should greatly reduce the amount of work the netcode must do, helping improve server performance. A greater proportion of client bandwidth will be spent on entities closest to the client."
       }
     ]
   },
+
+
+  {
+    "id": "environments-surface-outposts",
+    "content": [
+      {
+        "data": "Surface Outposts are procedurally generated, modular buildings that will be found dotted across the many moons and planets players will be allowed to land and/or dock on. These outposts will vary in appearance. What they offer to pilots or merchants will also depend on a variety of variables, such as location and current economic state."
+      }
+    ]
+  },
+  {
+    "id": "environments-delmar-levski",
+    "content": [
+      {
+        "data": "Levski is a landing zone on the planet of Delamar located in the Nyx system."
+      }
+    ]
+  },
+  {
+    "id": "environments-moons",
+    "content": [
+      {
+        "data": "Moons, much like their larger planetary bodies, are areas in the game that players can fly to and land on. Although a many number of moons are barren or desolate, some moons can be larger than your typical habitable planet as well as have their own thriving ecosystem."
+      }
+    ]
+  },
+  {
+    "id": "environments-debris-fields",
+    "content": [
+      {
+        "data": "Debris Fields are large masses of flotsam with the potential for lucrative rewards. Was it the site of an ancient battle containing unheard of technology or materials? Maybe it was a hauler of precious minerals that taxed its engines a little too hard before they blew. Regardless of the origin, staying around too long might draw unwanted attention."
+      }
+    ]
+  },
+
+
   {
     "id": "3.0-moons",
     "sections": true,
     "content": [
       {
-        "data": "<b>Yela:</b> Yela is the most frigid of the Crusader moons. Those bold (or careless) enough to step outside without a spacesuit will be killed instantly by its freezing temperatures. If the cold doesn’t kill you, then any of the treacherous crevasses that crisscross the planet might. Cyrovolcanos have been known to erupt unexpectedly from such crevasses, so be wary when flying at low altitudes. Despite all its danger, there is much beauty to be found on Yela, like the underwater caves hidden beneath the moon’s crust. <img src=\"https://robertsspaceindustries.com/media/5yqbc0y8ugvimr/post/Yela_2.gif\" />"
+        "data": "<b>Yela:</b> Yela is the most frigid of the Crusader moons. Those bold (or careless) enough to step outside without a spacesuit will be killed instantly by its freezing temperatures. If the cold doesn’t kill you, then any of the treacherous crevasses that crisscross the planet might. Cyrovolcanos have been known to erupt unexpectedly from such crevasses, so be wary when flying at low altitudes. Despite all its danger, there is much beauty to be found on Yela, like the underwater caves hidden beneath the moon’s crust."
       },
       {
         "data": "<b>Cellin:</b> Burning with volcanic activity, Cellin is the counter to her icy sister. Although the volcanoes have been dormant for hundreds of years, the surface is dotted with thermal geysers that erupt without notice. The largest of such geysers can destroy heavy vehicles. Highly corrosive clouds of gas are regularly released from the moon’s surface, creating low visibility and damaging anything caught outside."
       },
       {
-        "data": "<b>Daymar:</b> Daymar’s surface is like a harmonic blend of Yela and Cellin. Its mountainous surface is reminiscent of Cellin’s volcanoes, while its craters share a warm likeness to Yela’s frozen crevessases. Its dense atmosphere, thick fog and the loose dirt of the surface makes travel difficult. Lightning storms can help illuminate the fog, just don’t get struck by their flash. <img src=\"https://robertsspaceindustries.com/media/4bz8ruvxgqcecr/post/Daymar_2.gif\"/>"
+        "data": "<b>Daymar:</b> Daymar’s surface is like a harmonic blend of Yela and Cellin. Its mountainous surface is reminiscent of Cellin’s volcanoes, while its craters share a warm likeness to Yela’s frozen crevessases. Its dense atmosphere, thick fog and the loose dirt of the surface makes travel difficult. Lightning storms can help illuminate the fog, just don’t get struck by their flash."
       }
     ]
   },
+
+
+  {
+    "id": "solar-system-shop-service-3-0",
+    "content": [
+      {
+        "data": "The Solar System Shop Service dictates what retail products, natural resources, and services shops are willing to buy and sell. It also decides their current level of inventory and prices, all of which may vary over time. It acts as an intermediary between the game and the back end simulation/rule set."
+      }
+    ]
+  },
+  {
+    "id": "solar-system-mission-service-3-0",
+    "content": [
+      {
+        "data": "The Solar System Mission Service dictates what missions are being offered at various locations and at what price. It is also responsible for specifying when and where dynamic content should be instantiated and how it should be customized. That way, the reality players see matches what it should in that area, based upon hints provided by the back end simulation/rule set. This service will split into two for 3.1, with the latter functionality becoming the responsibility of a dedicated Dynamic Content Service."
+      }
+    ]
+  },
+
+
   {
     "id": "ships-drake-dragonfly",
     "enabled": false,
@@ -82,53 +164,14 @@
       }
     ]
   },
+
+
   {
     "id": "weapons-p8-sc",
     "enabled": false,
     "content": [
       {
         "data": "<img src=\"assets/img/details/weapons-p8-sc.jpg\"/>"
-      }
-    ]
-  },
-  {
-    "id": "environments-surface-outposts",
-    "enabled": false,
-    "content": [
-      {
-        "data": "<img src=\"assets/img/details/environments-surface-outposts.jpg\"/>"
-      }
-    ]
-  },
-  {
-    "id": "solar-system-shop-service-3-0",
-    "content": [
-      {
-        "data": "<b>Description:</b> The Solar System Shop Service dictates what retail products, natural resources, and services shops are willing to buy and sell. It also decides their current level of inventory and prices, all of which may vary over time. It acts as an intermediary between the game and the back end simulation/rule set."
-      }
-    ]
-  },
-  {
-    "id": "solar-system-mission-service-3-0",
-    "content": [
-      {
-        "data": "The Solar System Mission Service dictates what missions are being offered at various locations and at what price. It is also responsible for specifying when and where dynamic content should be instantiated and how it should be customized. That way, the reality players see matches what it should in that area, based upon hints provided by the back end simulation/rule set. This service will split into two for 3.1, with the latter functionality becoming the responsibility of a dedicated Dynamic Content Service."
-      }
-    ]
-  },
-  {
-    "id": "release-ptu",
-    "content": [
-      {
-        "data": "The PTU is a replica environment of all servers needed to operate the game and the platform. This environment exists to allow public testing phases of unreleased patches of the game and platform. This environment will be publicly available to players, but under our tight access control. This way we can, if we want, have an internal playtest of a patch in a release environment without needing to expose it to the public."
-      }
-    ]
-  },
-  {
-    "id": "release-evocati",
-    "content": [
-      {
-        "data": "Our smallest group of testers who help us get our releases ready for a proper public viewing more quickly! Picked from Issue Council posters with multiple submissions or contributions and from our most active PTU testers."
       }
     ]
   }
