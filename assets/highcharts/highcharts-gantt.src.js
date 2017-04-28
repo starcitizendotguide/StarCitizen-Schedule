@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS vgantt (2017-04-23)
+ * @license Highcharts JS vgantt (2017-04-26)
  *
  * (c) 2017 Lars Cabrera, Torstein Honsi, Jon Arild Nygard & Oystein Moseng
  *
@@ -26091,12 +26091,12 @@
                             H.animObject(this.renderer.globalAnimation).duration;
 
                     // Clear immediately
-                    pathfinder.clear();
+                    //pathfinder.clear();
 
                     // Update after animation
-                    /*this.pathfinder.updateTimeout = H.syncTimeout(function () {
-                        pathfinder.update();
-                    }, animDuration);*/
+                    //this.pathfinder.updateTimeout = H.syncTimeout(function () {
+                    //    pathfinder.update();
+                    //}, animDuration);
                 });
             },
 
