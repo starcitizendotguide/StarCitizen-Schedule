@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS vgantt (2017-04-26)
+ * @license Highcharts JS vgantt (2017-05-02)
  *
  * (c) 2017 Lars Cabrera, Torstein Honsi, Jon Arild Nygard & Oystein Moseng
  *
@@ -26082,21 +26082,19 @@
                 // Init path reference list
                 this.paths = [];
 
-                var $this = this;
-
                 // Recalculate paths/obstacles on chart redraw
                 addEvent(chart, 'redraw', function () {
-                    var pathfinder = $this,
+                    /*var pathfinder = this.pathfinder,
                         animDuration = this.renderer.globalAnimation &&
                             H.animObject(this.renderer.globalAnimation).duration;
 
                     // Clear immediately
-                    //pathfinder.clear();
+                    pathfinder.clear();
 
                     // Update after animation
-                    //this.pathfinder.updateTimeout = H.syncTimeout(function () {
-                    //    pathfinder.update();
-                    //}, animDuration);
+                    this.pathfinder.updateTimeout = H.syncTimeout(function () {
+                        pathfinder.update();
+                    }, animDuration);*/
                 });
             },
 
