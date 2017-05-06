@@ -252,14 +252,14 @@
         {
           "title": "Item 2.0 UI",
           "start": "3.4.2017",
-          "end": "26.5.2017"
+          "end": "5.6.2017"
         }
       ],
       [
         {
           "title": "Field of View Slider",
           "start": "3.4.2017",
-          "end": "5.5.2017"
+          "end": "24.5.2017"
         },
         {
           "title": "Heavy Marine Armour",
@@ -283,7 +283,7 @@
         {
           "title": "Personal Manager App",
           "start": "25.4.2017",
-          "end": "23.5.2017"
+          "end": "8.6.2017"
         }
       ],
       [
@@ -327,6 +327,13 @@
           "start": "24.5.2017",
           "end": "15.6.2017"
         }
+      ],
+      [
+        {
+          "title": "Mission Manager App",
+          "start": "10.5.2017",
+          "end": "2.6.2017"
+        }
       ]
     ]
   },
@@ -356,7 +363,7 @@
         {
           "title": "Render to Texture",
           "start": "3.4.2017",
-          "end": "24.5.2017",
+          "end": "15.6.2017",
           "detailID": "render-to-texture"
         }
       ],
