@@ -26453,7 +26453,7 @@ Pathfinder.prototype = {
 
 		// Recalculate paths/obstacles on chart redraw
 		addEvent(chart, 'redraw', function () {
-			this.pathfinder.update();
+			//this.pathfinder.update();
 		});
 	},
 
