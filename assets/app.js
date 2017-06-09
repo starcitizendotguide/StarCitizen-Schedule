@@ -107,7 +107,7 @@ function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            console.log(data);
+
             //--- Update title
             title += ' (Updated: ' + xhr.getResponseHeader("Last-Modified") + ')'
 
