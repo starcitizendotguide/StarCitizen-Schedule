@@ -63,7 +63,6 @@ $(document).ready(function () {
 
     });
 
-
     //--- Load & Draw All Schedules
     $.getJSON('assets/data/index.json', { _: new Date().getTime() }, function (entries) {
         
@@ -103,326 +102,336 @@ $(document).ready(function () {
 
 function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
 
-    $.getJSON('assets/data/schedules/' + file, { _: new Date().getTime() }, function (data) {
+    var xhr = $.ajax({
+        url: ('assets/data/schedules/' + file + "?" + new Date().getTime()),
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
+            console.log(data);
+            //--- Update title
+            title += ' (Updated: ' + xhr.getResponseHeader("Last-Modified") + ')'
 
-        //--- Array to store the data
-        var seriesData = [];
-        var highlights = [];
+            //---
+            //--- Array to store the data
+            var seriesData = [];
+            var highlights = [];
 
-        //--- Min & Max to scale x-axis correctly
-        var minDate = Number.MAX_SAFE_INTEGER;
-        var maxDate = Number.MIN_SAFE_INTEGER;
+            //--- Min & Max to scale x-axis correctly
+            var minDate = Number.MAX_SAFE_INTEGER;
+            var maxDate = Number.MIN_SAFE_INTEGER;
 
-        //--- Overall progress
-        var projectProgress = [];
+            //--- Overall progress
+            var projectProgress = [];
 
-        //--- Data
-        var dataEntry = null;
+            //--- Data
+            var dataEntry = null;
 
-        //--- Parse the Data
-        $.each(data, function (index, value) {
+            //--- Parse the Data
+            $.each(data, function (index, value) {
 
-            if (value.title === '__DATA__') {
-                dataEntry = value;
-                return;
-            }
+                if (value.title === '__DATA__') {
+                    dataEntry = value;
+                    return;
+                }
 
-            //--- Data Building for our default Gantt Diagramm
-            var tmp = {
-                name: value.title,
-                color: getColor(index),
-                data: []
-            };
+                //--- Data Building for our default Gantt Diagramm
+                var tmp = {
+                    name: value.title,
+                    color: getColor(index),
+                    data: []
+                };
 
-            //--- Overall sub task progress
-            var overallDone = 0;
-            var weight = 0;
-            $.each(value.children, function (k, v) {
-                $.each(v, function (k, v) {
-                    weight += moment(convertToDate(v.end, false)).diff(convertToDate(v.start, true));
-                })
-            });
+                //--- Overall sub task progress
+                var overallDone = 0;
+                var weight = 0;
+                $.each(value.children, function (k, v) {
+                    $.each(v, function (k, v) {
+                        weight += moment(convertToDate(v.end, false)).diff(convertToDate(v.start, true));
+                    })
+                });
 
-            //--- Local min & max
-            var localMinDate = Number.MAX_SAFE_INTEGER;
-            var localMaxDate = Number.MIN_SAFE_INTEGER;
+                //--- Local min & max
+                var localMinDate = Number.MAX_SAFE_INTEGER;
+                var localMaxDate = Number.MIN_SAFE_INTEGER;
 
-            //--- Append all Children
-            $.each(value.children, function (k, v) {
-                var dependencyId = null;
-                $.each(v, function (k, v) {
+                //--- Append all Children
+                $.each(value.children, function (k, v) {
+                    var dependencyId = null;
+                    $.each(v, function (k, v) {
 
-                    //--- Converting start & end point to Date
-                    var s = convertToDate(v.start, true), e = convertToDate(v.end, false);
+                        //--- Converting start & end point to Date
+                        var s = convertToDate(v.start, true), e = convertToDate(v.end, false);
 
-                    //--- Check for error
-                    if (e < s) {
-                        console.error('The child\'s end date is before its start date. The child ID is "' + v.title + '" (' + file + ')');
-                    }
+                        //--- Check for error
+                        if (e < s) {
+                            console.error('The child\'s end date is before its start date. The child ID is "' + v.title + '" (' + file + ')');
+                        }
 
-                    //--- Find local max & min date
-                    localMinDate = Math.min(localMinDate, s);
-                    localMaxDate = Math.max(localMaxDate, e);
+                        //--- Find local max & min date
+                        localMinDate = Math.min(localMinDate, s);
+                        localMaxDate = Math.max(localMaxDate, e);
 
-                    //--- How much is overall done by multipling it with its according weight.
-                    overallDone += Math.max(0, Math.min(1, moment().diff(s) / moment(e).diff(s))) * (moment(e).diff(s) / weight);
+                        //--- How much is overall done by multipling it with its according weight.
+                        overallDone += Math.max(0, Math.min(1, moment().diff(s) / moment(e).diff(s))) * (moment(e).diff(s) / weight);
 
-                    //--- Add data
-                    tmp.data.push({
-                        taskName: v.title,
-                        id: v.title,
-                        start: s,
-                        end: e,
-                        parent: value.title,
-                        dependency: dependencyId,
-                        detailID: v.detailID,
-                        color: getColor(index)
+                        //--- Add data
+                        tmp.data.push({
+                            taskName: v.title,
+                            id: v.title,
+                            start: s,
+                            end: e,
+                            parent: value.title,
+                            dependency: dependencyId,
+                            detailID: v.detailID,
+                            color: getColor(index)
+                        });
+
+                        if (!(v.detailID === undefined) && detailMap[v.detailID] === undefined) {
+                            console.error("Content System: The child with the ID \"" + v.title + "\" (" + file + ") uses the detail \"" + v.detailID + "\" which does not exist.");
+                        }
+
+                        //--- Only store if we wanna draw the critical path, otherwise
+                        // we can just ignore it
+                        if (criticalPath) {
+                            dependencyId = v.title;
+                        }
                     });
 
-                    if (!(v.detailID === undefined) && detailMap[v.detailID] === undefined) {
-                        console.error("Content System: The child with the ID \"" + v.title + "\" (" + file + ") uses the detail \"" + v.detailID + "\" which does not exist.");
-                    }
-
-                    //--- Only store if we wanna draw the critical path, otherwise
-                    // we can just ignore it
-                    if (criticalPath) {
-                        dependencyId = v.title;
-                    }
                 });
 
-            });
+                //--- Track total project progress
+                projectProgress.push({
+                    progress: overallDone,
+                    weight: weight
+                });
 
-            //--- Track total project progress
-            projectProgress.push({
-                progress: overallDone,
-                weight: weight
-            });
-
-            //--- Create parent & active highlighting
-            highlights.push(value.title);
-            tmp.data.unshift({
-                taskName: value.title,
-                id: value.title,
-                start: localMinDate,
-                end: localMaxDate,
-                completed: {
-                    amount: parseFloat(overallDone.toFixed(4)),
-                    fill: '#40e6f0'
-                },
-                detailID: value.detailID
-            });
-
-
-            //--- Find Start And End Of Schedule
-            minDate = Math.min(minDate, localMinDate);
-            maxDate = Math.max(maxDate, localMaxDate);
-
-            //--- Push Final Data
-            seriesData.push(tmp);
-
-        });
-
-        //--- Calculate project progress
-        var projectTotalWeight = 0;
-        var projectTotalProgress = 0;
-        $.each(projectProgress, function (k, entry) {
-            projectTotalWeight += entry.weight;
-        });
-        $.each(projectProgress, function (k, entry) {
-            projectTotalProgress += (entry.weight / projectTotalWeight * entry.progress);
-        });
-
-        //--- Main Entry with some data
-        var mainEntry = {
-            name: title,
-            data: [
-                {
-                    id: title,
-                    taskName: title,
-                    start: minDate,
-                    end: maxDate,
+                //--- Create parent & active highlighting
+                highlights.push(value.title);
+                tmp.data.unshift({
+                    taskName: value.title,
+                    id: value.title,
+                    start: localMinDate,
+                    end: localMaxDate,
                     completed: {
-                        amount: parseFloat(projectTotalProgress.toFixed(4)),
-                    }
-                }
-            ]
-        };
-
-        if (!(dataEntry === undefined)) {
-            if (!(dataEntry.evocati === undefined)) {
-                mainEntry.data.push({
-                    parent: title,
-                    taskName: 'Evocati - Release Date',
-                    start: convertToDate(dataEntry.evocati, true),
-                    parent: title,
-                    milestone: true
+                        amount: parseFloat(overallDone.toFixed(4)),
+                        fill: '#40e6f0'
+                    },
+                    detailID: value.detailID
                 });
 
-                maxDate = Math.max(convertToDate(dataEntry.evocati, false), maxDate);
-            }
-            if (!(dataEntry.ptu === undefined)) {
-                mainEntry.data.push({
-                    parent: title,
-                    taskName: 'PTU - Release Date',
-                    start: convertToDate(dataEntry.ptu, true),
-                    parent: title,
-                    milestone: true,
-                });
 
-                maxDate = Math.max(convertToDate(dataEntry.ptu, false), maxDate);
-            }
-            if (!(dataEntry.public === undefined)) {
-                mainEntry.data.push({
-                    parent: title,
-                    taskName: 'Public - Release Date',
-                    start: convertToDate(dataEntry.public, true),
-                    parent: title,
-                    milestone: true
-                });
+                //--- Find Start And End Of Schedule
+                minDate = Math.min(minDate, localMinDate);
+                maxDate = Math.max(maxDate, localMaxDate);
 
-                maxDate = Math.max(convertToDate(dataEntry.public, false), maxDate);
-            }
-        }
+                //--- Push Final Data
+                seriesData.push(tmp);
 
-        highlights.push(title);
-        seriesData.unshift(mainEntry);
+            });
 
-        //--- Some settings
-        var ignoreFirstLoad = ignoreFirst;
-        var fontColor = '#3FC9E1';
+            //--- Calculate project progress
+            var projectTotalWeight = 0;
+            var projectTotalProgress = 0;
+            $.each(projectProgress, function (k, entry) {
+                projectTotalWeight += entry.weight;
+            });
+            $.each(projectProgress, function (k, entry) {
+                projectTotalProgress += (entry.weight / projectTotalWeight * entry.progress);
+            });
 
-        Highcharts.ganttChart(containerID, {
-            series: seriesData,
-            chart: {
-                backgroundColor: 'rgba(255, 255, 255, 0)',
-                style: {
-                    fontFamily: 'Electrolize',
-                    color: fontColor
-                },
-                events: {
-                    load: function (event) {
-                        //--- Ignore the first load, because this gets fired eventhough it didn't finish loading yet
-                        if (ignoreFirstLoad) {
-                            ignoreFirstLoad = false;
-                            return;
-                        }
-
-                        //--- We only wanna kick this in once and ignore all other graphs.
-                        if (drawFirst) {
-                            $('#loading').hide();
-
-                            $('#schedules').fadeIn('slow');
-                            $('#' + firstGraphToDraw).fadeIn('slow');
-                            $('.disclaimer').fadeIn('slow');
-                            drawFirst = false;
+            //--- Main Entry with some data
+            var mainEntry = {
+                name: title,
+                data: [
+                    {
+                        id: title,
+                        taskName: title,
+                        start: minDate,
+                        end: maxDate,
+                        completed: {
+                            amount: parseFloat(projectTotalProgress.toFixed(4)),
                         }
                     }
+                ]
+            };
+
+            if (!(dataEntry === undefined)) {
+                if (!(dataEntry.evocati === undefined)) {
+                    mainEntry.data.push({
+                        parent: title,
+                        taskName: 'Evocati - Release Date',
+                        start: convertToDate(dataEntry.evocati, true),
+                        parent: title,
+                        milestone: true
+                    });
+
+                    maxDate = Math.max(convertToDate(dataEntry.evocati, false), maxDate);
                 }
-            },
-            title: {
-                text: title,
-                style: {
-                    color: fontColor
+                if (!(dataEntry.ptu === undefined)) {
+                    mainEntry.data.push({
+                        parent: title,
+                        taskName: 'PTU - Release Date',
+                        start: convertToDate(dataEntry.ptu, true),
+                        parent: title,
+                        milestone: true,
+                    });
+
+                    maxDate = Math.max(convertToDate(dataEntry.ptu, false), maxDate);
                 }
-            },
-            xAxis: {
-                currentDateIndicator: true,
-                min: minDate,
-                max: maxDate,
-                labels: {
+                if (!(dataEntry.public === undefined)) {
+                    mainEntry.data.push({
+                        parent: title,
+                        taskName: 'Public - Release Date',
+                        start: convertToDate(dataEntry.public, true),
+                        parent: title,
+                        milestone: true
+                    });
+
+                    maxDate = Math.max(convertToDate(dataEntry.public, false), maxDate);
+                }
+            }
+
+            highlights.push(title);
+            seriesData.unshift(mainEntry);
+
+            //--- Some settings
+            var ignoreFirstLoad = ignoreFirst;
+            var fontColor = '#3FC9E1';
+
+            Highcharts.ganttChart(containerID, {
+                series: seriesData,
+                chart: {
+                    backgroundColor: 'rgba(255, 255, 255, 0)',
                     style: {
-                        color: fontColor
-                    }
-                }
-            },
-            yAxis: {
-                labels: {
-                    style: {
+                        fontFamily: 'Electrolize',
                         color: fontColor
                     },
-                    formatter: function () {
-                        if (highlights.includes(this.value)) {
-                            return '<b>' + this.value + '</b>';
-                        }
-                        return this.value;
-                    }
-                }
-            },
-            legend: {
-                itemStyle: {
-                    color: fontColor
-                },
-                itemHoverStyle: {
-                    color: '#C3F2FF',
-                    'text-shadow': '0 0 46px rgba(13, 71, 203, 0.57), 0 0 13px rgba(0, 112, 202, 0.75);'
-                }
-            },
-            credits: {
-                enabled: true
-            },
-            tooltip: {
-                enabled: true,
-                useHTML: true,
-                formatter: function () {
-
-                    var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY');
-
-                    if (this.point.parent == title) {
-                        return tooltipContent;
-                    }
-
-                    tooltipContent += ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i></div>';
-
-                    if (!(this.point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
-
-                        var detail = detailMap[this.point.detailID];
-
-                        if ((!(detail.enabled === undefined) && detail.enabled === true) || detail.enabled === undefined){
-                            var firstContentAdd = true;
-                            tooltipContent += '<div class="info-box-content"><hr />';
-
-                            $.each(detail.content, function (k, value) {
-                                tooltipContent += (firstContentAdd || detail.sections ? '' : '<br />') + value.data;
-
-                                if (detail.sections === true && !(k === detail.content.length - 1)) {
-                                    tooltipContent += '<hr />';
-                                }
-
-                                firstContentAdd = false;
-                            });
-
-                            tooltipContent += '</div>';
-                        }
-
-                    }
-
-                    return tooltipContent;
-                }
-            },
-            plotOptions: {
-                series: {
-                    dataLabels: {
-                        formatter: function () {
-                            if (this.point.completed === undefined) {
+                    events: {
+                        load: function (event) {
+                            //--- Ignore the first load, because this gets fired eventhough it didn't finish loading yet
+                            if (ignoreFirstLoad) {
+                                ignoreFirstLoad = false;
                                 return;
                             }
 
-                            var progress = Highcharts.numberFormat(this.point.completed.amount * 100, 2);
+                            //--- We only wanna kick this in once and ignore all other graphs.
+                            if (drawFirst) {
+                                $('#loading').hide();
 
-                            if (this.key == this.series.chart.title.textStr) {
-                                return (progress + '% OF THE SCHEDULE COMPLETED');
-                            } 
-                            return  (progress + '% progress in all sub tasks');
+                                $('#schedules').fadeIn('slow');
+                                $('#' + firstGraphToDraw).fadeIn('slow');
+                                $('.disclaimer').fadeIn('slow');
+                                drawFirst = false;
+                            }
                         }
                     }
+                },
+                title: {
+                    text: title,
+                    style: {
+                        color: fontColor
+                    }
+                },
+                xAxis: {
+                    currentDateIndicator: true,
+                    min: minDate,
+                    max: maxDate,
+                    labels: {
+                        style: {
+                            color: fontColor
+                        }
+                    }
+                },
+                yAxis: {
+                    labels: {
+                        style: {
+                            color: fontColor
+                        },
+                        formatter: function () {
+                            if (highlights.includes(this.value)) {
+                                return '<b>' + this.value + '</b>';
+                            }
+                            return this.value;
+                        }
+                    }
+                },
+                legend: {
+                    itemStyle: {
+                        color: fontColor
+                    },
+                    itemHoverStyle: {
+                        color: '#C3F2FF',
+                        'text-shadow': '0 0 46px rgba(13, 71, 203, 0.57), 0 0 13px rgba(0, 112, 202, 0.75);'
+                    }
+                },
+                credits: {
+                    enabled: true
+                },
+                tooltip: {
+                    enabled: true,
+                    useHTML: true,
+                    formatter: function () {
+
+                        var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY');
+
+                        if (this.point.parent == title) {
+                            return tooltipContent;
+                        }
+
+                        tooltipContent += ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i></div>';
+
+                        if (!(this.point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
+
+                            var detail = detailMap[this.point.detailID];
+
+                            if ((!(detail.enabled === undefined) && detail.enabled === true) || detail.enabled === undefined) {
+                                var firstContentAdd = true;
+                                tooltipContent += '<div class="info-box-content"><hr />';
+
+                                $.each(detail.content, function (k, value) {
+                                    tooltipContent += (firstContentAdd || detail.sections ? '' : '<br />') + value.data;
+
+                                    if (detail.sections === true && !(k === detail.content.length - 1)) {
+                                        tooltipContent += '<hr />';
+                                    }
+
+                                    firstContentAdd = false;
+                                });
+
+                                tooltipContent += '</div>';
+                            }
+
+                        }
+
+                        return tooltipContent;
+                    }
+                },
+                plotOptions: {
+                    series: {
+                        dataLabels: {
+                            formatter: function () {
+                                if (this.point.completed === undefined) {
+                                    return;
+                                }
+
+                                var progress = Highcharts.numberFormat(this.point.completed.amount * 100, 2);
+
+                                if (this.key == this.series.chart.title.textStr) {
+                                    return (progress + '% OF THE SCHEDULE COMPLETED');
+                                }
+                                return (progress + '% progress in all sub tasks');
+                            }
+                        }
+                    }
+                },
+                exporting: {
+                    fallbackToExportServer: false,
+                    filename: title,
+                    printMaxWidth: 1920
                 }
-            },
-            exporting: {
-                fallbackToExportServer: false,
-                filename: title,
-                printMaxWidth: 1920
-            }
-        });
+            });
+
+        }
     });
 }
 
