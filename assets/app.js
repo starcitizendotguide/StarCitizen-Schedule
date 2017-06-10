@@ -102,6 +102,7 @@ $(document).ready(function () {
                         $.each(v.children, function (ak, av) {
                             $.each(av, function (bk, bv) {
                                 diffMap.push({
+                                    "category": v.title,
                                     "title": bv.title,
                                     "priorEnd": convertToDate(bv.end, false)
                                 });
@@ -433,9 +434,9 @@ function drawSchedule(file, diffMap, title, containerID, criticalPath, ignoreFir
                         }
 
                         //--- Show Diff
-                        if (diffMap.length > 0) {
+                        if (diffMap.length > 0 && point.options.end > moment()) {
                             $.each(diffMap, function (key, value) {
-                                if (value.title == point.options.name) {
+                                if (value.title === point.options.name && value.category === point.parent) {
                                     var delta = calculateDayDiff(point.options.end, value.priorEnd);
 
                                     if (!(point.detailID === undefined)) {
