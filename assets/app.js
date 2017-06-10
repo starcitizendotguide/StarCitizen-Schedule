@@ -446,7 +446,7 @@ function drawSchedule(file, diffMap, title, containerID, criticalPath, ignoreFir
                                     if (delta === 0) {
                                         tooltipContent += ('The ETA did not change since the last schedule report.');
                                     } else if(delta < 0) {
-                                        tooltipContent += ('<font color="red">ETA was ' + moment(value.priorEnd).format('MMMM Do, YYYY') + ': <b>' + delta + ' days delayed</b>.</font>');
+                                        tooltipContent += ('<font color="red">ETA was ' + moment(value.priorEnd).format('MMMM Do, YYYY') + ': <b>' + (delta * -1) + ' days delayed</b>.</font>');
                                     } else if (delta > 0) {
                                         tooltipContent += ('<font color="green">ETA was ' + moment(value.priorEnd).format('MMMM Do, YYYY') + ': <b>' + delta + ' days earlier</b>.</font>');
                                     }
