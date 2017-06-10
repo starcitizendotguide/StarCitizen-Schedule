@@ -434,7 +434,7 @@ function drawSchedule(file, diffMap, title, containerID, criticalPath, ignoreFir
                         }
 
                         //--- Show Diff
-                        if (diffMap.length > 0 && point.options.end > moment()) {
+                        if (diffMap.length > 0 /*&& point.options.end > moment()*/) {
                             $.each(diffMap, function (key, value) {
                                 if (value.title === point.options.name && value.category === point.parent) {
                                     var delta = calculateDayDiff(point.options.end, value.priorEnd);
