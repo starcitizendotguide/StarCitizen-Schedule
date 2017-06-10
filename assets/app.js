@@ -12,6 +12,10 @@ function convertContentToContainer(containerID) {
     return containerID.toLowerCase().replace(/[^\w ]+/g, '').replace(/ +/g, '-');
 }
 
+function calculateDayDiff(first, second) {
+    return Math.round((second - first) / (1000 * 60 * 60 * 24));
+}
+
 /**
  * http://stackoverflow.com/a/21903119
  */
@@ -88,7 +92,31 @@ $(document).ready(function () {
                 drawFirst = true;
             }
 
-            drawSchedule(index.files[0] /*TODO*/, index.name, containerID, CRITICAL_PATH_ENABLED, (entries.schedules.length > 1));
+            var diffMap = [];
+
+            //--- Populate diff map with prior version
+            if (index.files.length > 1) {
+                $.getJSON('assets/data/schedules/' + index.files[1], function (data) {
+
+                    $.each(data, function (k, v) {
+                        $.each(v.children, function (ak, av) {
+                            $.each(av, function (bk, bv) {
+                                diffMap.push({
+                                    "title": bv.title,
+                                    "priorEnd": convertToDate(bv.end, false)
+                                });
+                            });
+                        });
+                    });
+
+                    drawSchedule(index.files[0] /*TODO*/, diffMap, index.name, containerID, CRITICAL_PATH_ENABLED, (entries.schedules.length > 1));
+                });
+            }
+            //--- If we don't have a prior schedule version then we also don't have to populate the diffMap
+            else {
+                drawSchedule(index.files[0] /*TODO*/, diffMap, index.name, containerID, CRITICAL_PATH_ENABLED, (entries.schedules.length > 1));
+            }
+
 
         });
 
@@ -100,7 +128,7 @@ $(document).ready(function () {
 
 });
 
-function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
+function drawSchedule(file, diffMap, title, containerID, criticalPath, ignoreFirst) {
 
     var xhr = $.ajax({
         url: ('assets/data/schedules/' + file + "?" + new Date().getTime()),
@@ -372,17 +400,18 @@ function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
                     useHTML: true,
                     formatter: function () {
 
-                        var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(this.point.start).format('MMMM Do, YYYY');
+                        var point = this.point;
+                        var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(point.start).format('MMMM Do, YYYY');
 
                         if (this.point.parent == title) {
                             return tooltipContent;
                         }
 
-                        tooltipContent += ' - ' + moment(this.point.end).format('MMMM Do, YYYY') + '</i></div>';
+                        tooltipContent += ' - ' + moment(point.end).format('MMMM Do, YYYY') + '</i></div>';
 
-                        if (!(this.point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
+                        if (!(point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
 
-                            var detail = detailMap[this.point.detailID];
+                            var detail = detailMap[point.detailID];
 
                             if ((!(detail.enabled === undefined) && detail.enabled === true) || detail.enabled === undefined) {
                                 var firstContentAdd = true;
@@ -401,6 +430,28 @@ function drawSchedule(file, title, containerID, criticalPath, ignoreFirst) {
                                 tooltipContent += '</div>';
                             }
 
+                        }
+
+                        //--- Show Diff
+                        if (diffMap.length > 0) {
+                            $.each(diffMap, function (key, value) {
+                                if (value.title == point.options.name) {
+                                    var delta = calculateDayDiff(point.options.end, value.priorEnd);
+
+                                    if (!(point.detailID === undefined)) {
+                                        tooltipContent += '<hr />';
+                                    }
+
+                                    if (delta === 0) {
+                                        tooltipContent += ('The ETA did not change since the last schedule report.');
+                                    } else if(delta < 0) {
+                                        tooltipContent += ('<font color="red">ETA was ' + moment(value.priorEnd).format('MMMM Do, YYYY') + ': <b>' + delta + ' days delayed</b>.</font>');
+                                    } else if (delta > 0) {
+                                        tooltipContent += ('<font color="green">ETA was ' + moment(value.priorEnd).format('MMMM Do, YYYY') + ': <b>' + delta + ' days earlier</b>.</font>');
+                                    }
+                                    return false;
+                                }
+                            });
                         }
 
                         return tooltipContent;
