@@ -1,0 +1,588 @@
+﻿[
+  {
+    "title": "__DATA__",
+    "public": "27.7.2017",
+    "ptu": "20.7.2017",
+    "evocati": "5.7.2017"
+  },
+  {
+    "title": "Persistent Universe Content",
+    "detailID": "pu",
+    "children": [
+      [
+        {
+          "title": "Moons",
+          "start": "3.4.2017",
+          "end": "7.4.2017",
+          "detailID": "environments-moons"
+        }
+      ],
+      [
+        {
+          "title": "Surface Outposts",
+          "start": "3.4.2017",
+          "end": "2.6.2017",
+          "detailID": "environments-surface-outposts"
+        },
+        {
+          "title": "Inhabited Derelict Ship Sites",
+          "start": "16.6.2017",
+          "end": "30.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Surface Outposts Lighting",
+          "start": "29.5.2017",
+          "end": "26.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Mission Givers",
+          "start": "17.4.2017",
+          "end": "30.6.2017",
+          "detailID": "mission-givers" 
+        }
+      ],
+      [
+        {
+          "title": "Derelict Ships",
+          "start": "10.4.2017",
+          "end": "16.6.2017",
+          "detailID": "derelict-ships"
+        }
+      ],
+      [
+        {
+          "title": "Debris Fields",
+          "start": "18.4.2017",
+          "end": "26.5.2017",
+          "detailID": "environments-debris-fields"
+        }
+      ],
+      [
+        {
+          "title": "Delamar/Levski - Stretch Goal",
+          "start": "3.4.2017",
+          "end": "30.6.2017",
+          "detailID": "environments-delmar-levski"
+        }
+      ]        
+    ]
+  },
+  {
+    "title": "Gameplay",
+    "children": [
+      [
+        {
+          "title": "Pick Up & Carry",
+          "start": "3.4.2017",
+          "end": "26.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Repair",
+          "start": "15.5.2017",
+          "end": "16.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Player Manned Turrets",
+          "start": "6.4.2017",
+          "end": "8.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Atmospheric Entry Gamecode",
+          "start": "7.4.2017",
+          "end": "3.5.2017"
+        },
+        {
+          "title": "Operator seats",
+          "start": "11.5.2017",
+          "end": "24.5.2017"
+        }
+      ],
+      [
+        {
+          "title": "Radar System",
+          "start": "3.4.2017",
+          "end": "5.5.2017"
+        },
+        {
+          "title": "Hint System",
+          "start": "9.5.2017",
+          "end": "30.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Inventory System Gamecode Engineering (Support)",
+          "start": "10.5.2017",
+          "end": "16.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Light Control System",
+          "start": "19.4.2017",
+          "end": "26.4.2017"
+        },
+        {
+          "title": "Cargo Gamecode Engineering",
+          "start": "27.4.2017",
+          "end": "19.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Fuel / Refuel",
+          "start": "3.4.2017",
+          "end": "12.4.2017"
+        },
+        {
+          "title": "Persistent Damage, Ammo and Missle Count",
+          "start": "24.4.2017",
+          "end": "7.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Power Supply / Pipes",
+          "start": "13.4.2017",
+          "end": "28.4.2017"
+        },
+        {
+          "title": "Rover and Dragonfly in Ships",
+          "start": "1.5.2017",
+          "end": "27.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Quantum Drive",
+          "start": "5.4.2017",
+          "end": "12.5.2017"
+        },
+        {
+          "title": "Commodities",
+          "start": "15.5.2017",
+          "end": "23.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Stamina",
+          "start": "3.4.2017",
+          "end": "31.5.2017"
+        }
+      ],
+      [
+        {
+          "title": "Doors & Airlocks",
+          "start": "3.4.2017",
+          "end": "22.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Item 2.0 Ship Conversion - Part 1",
+          "start": "3.4.2017",
+          "end": "1.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Item 2.0 Ship Conversion - Part 2",
+          "start": "29.5.2017",
+          "end": "23.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Kiosk Gamecode Engineering",
+          "start": "5.4.2017",
+          "end": "23.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Insurance",
+          "start": "24.4.2017",
+          "end": "23.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "IFCS Performance Improvements",
+          "start": "12.5.2017",
+          "end": "2.6.2017"
+        }
+      ]
+    ]
+  },
+  {
+    "title": "Core Tech",
+    "children": [
+      [
+        {
+          "title": "Planetary Tech",
+          "start": "3.4.2017",
+          "end": "31.5.2017"
+        }
+      ],
+      [
+        {
+          "title": "Solar System Tool",
+          "start": "3.4.2017",
+          "end": "31.5.2017"
+        }
+      ],
+      [
+        {
+          "title": "Entity Update Component Scheduler",
+          "start": "3.4.2017",
+          "end": "30.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Entity Owner Manager",
+          "start": "6.4.2017",
+          "end": "23.6.2017",
+          "detailID": "entity-owner-manager"
+        }
+      ]
+    ]
+  },
+  {
+    "title": "UI",
+    "children": [
+      [
+        {
+          "title": "Kiosk UI",
+          "start": "3.4.2017",
+          "end": "23.6.2017"
+        },
+        {
+          "title": "Vehicle Customiser App",
+          "start": "24.5.2017",
+          "end": "6.7.2017"
+        }
+      ],
+      [
+        {
+          "title": "StarMap App",
+          "start": "3.4.2017",
+          "end": "26.6.2017"
+        },
+        {
+          "title": "Inventory System UI",
+          "start": "3.4.2017",
+          "end": "19.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Item 2.0 UI",
+          "start": "3.4.2017",
+          "end": "27.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Field of View Slider",
+          "start": "3.4.2017",
+          "end": "24.5.2017"
+        },
+        {
+          "title": "Heavy Marine Armour",
+          "start": "2.6.2017",
+          "end": "9.6.2017"
+        },
+        {
+          "title": "Comms System UI",
+          "start": "19.6.2017",
+          "end": "30.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Character Customization",
+          "start": "2.5.2017",
+          "end": "4.7.2017"
+        }
+      ],
+      [
+        {
+          "title": "UI Owner Component for Items",
+          "start": "19.4.2017",
+          "end": "4.5.2017"
+        },
+        {
+          "title": "Personal Manager App",
+          "start": "25.4.2017",
+          "end": "21.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Cargo Manifest App",
+          "start": "19.5.2017",
+          "end": "19.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Mission Board App",
+          "start": "10.5.2017",
+          "end": "21.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "mobiGlas Overhaul - Stretch Goal",
+          "start": "18.4.2017",
+          "end": "12.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Ship Selector App",
+          "start": "24.5.2017",
+          "end": "3.7.2017"
+        }
+      ],
+      [
+        {
+          "title": "Mission Manager App",
+          "start": "10.5.2017",
+          "end": "21.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Heavy Armor for Star Marine",
+          "start": "5.6.2017",
+          "end": "9.6.2017"
+        }
+      ]
+    ]
+  },
+  {
+    "title": "AI",
+    "children": [
+      [
+        {
+          "title": "Mission System AI",
+          "start": "3.4.2017",
+          "end": "30.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "AI Turrets",
+          "start": "18.4.2017",
+          "end": "23.6.2017"
+        }
+      ]
+    ]
+  },
+  {
+    "title": "Graphics",
+    "children": [
+      [
+        {
+          "title": "Render to Texture",
+          "start": "3.4.2017",
+          "end": "29.6.2017",
+          "detailID": "render-to-texture"
+        }
+      ],
+      [
+        {
+          "title": "Live Environment-Probe Capture",
+          "start": "3.4.2017",
+          "end": "9.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Engine Trails & Contrils",
+          "start": "3.4.2017",
+          "end": "23.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Volumetric Fog",
+          "start": "3.4.2017",
+          "end": "9.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "GPU Particles",
+          "start": "3.4.2017",
+          "end": "7.4.2017"
+        },
+        {
+          "title": "Exposure Improvements",
+          "start": "20.6.2017",
+          "end": "30.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Atmospheric Entry Graphics",
+          "start": "7.4.2017",
+          "end": "5.5.2017"
+        },
+        {
+          "title": "Asteroid Physics",
+          "start": "13.6.2017",
+          "end": "19236.2017"
+        }
+      ]
+    ]
+  },
+  {
+    "title": "Backend",
+    "children": [
+      [
+        {
+          "title": "Solar System Shop Service",
+          "start": "6.4.2017",
+          "end": "23.6.2017",
+          "detailID": "solar-system-shop-service-3-0"
+        }
+      ],
+      [
+        {
+          "title": "Solar System Mission Service",
+          "start": "17.4.2017",
+          "end": "28.6.2017",
+          "detailID": "solar-system-mission-service-3-0"
+        }
+      ],
+      [
+        {
+          "title": "Diffusion Subset for 3.0.0",
+          "start": "3.4.2017",
+          "end": "16.6.2017",
+          "detailID": "diffusion-subset"
+        }
+      ]
+    ]
+  },
+  {
+    "title": "Network",
+    "children": [
+      [
+        {
+          "title": "New Message Queue",
+          "start": "18.4.2017",
+          "end": "23.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Physics Serialization",
+          "start": "18.4.2017",
+          "end": "20.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Persistent Data Refactor",
+          "start": "5.5.2017",
+          "end": "19.6.2017"
+        }
+      ]
+    ]
+  },
+  {
+    "title": "Ships & Weapons",
+    "children": [
+      [
+        {
+          "title": "Drake Dragonfly",
+          "start": "3.4.2017",
+          "end": "12.5.2017",
+          "detailID": "ships-drake-dragonfly"
+        }
+      ],
+      [
+        {
+          "title": "Drake Cutlass Black",
+          "start": "3.4.2017",
+          "end": "16.6.2017",
+          "detailID": "ships-drake-cutlass-black"
+        }
+      ],
+      [
+        {
+          "title": "RSI Constellation Aquilla",
+          "start": "3.4.2017",
+          "end": "12.5.2017",
+          "detailID": "ships-rsi-constellation-aquilla"
+        }
+      ],
+      [
+        {
+          "title": "RSI Ursa Rover",
+          "start": "3.4.2017",
+          "end": "16.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "MISC Prospector",
+          "start": "3.4.2017",
+          "end": "19.5.2017",
+          "detailID": "ships-misc-prospector"
+        }
+      ],
+      [
+        {
+          "title": "P8-SC",
+          "start": "3.4.2017",
+          "end": "4.5.2017",
+          "detailID": "weapons-p8-sc"
+        }
+      ],
+      [
+        {
+          "title": "Scourge Rail Gun",
+          "start": "3.4.2017",
+          "end": "9.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Gallant Rifle (REWORK)",
+          "start": "3.4.2017",
+          "end": "1.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Arrowhead Sniper (REWORK)",
+          "start": "3.4.2017",
+          "end": "16.6.2017"
+        }
+      ],
+      [
+        {
+          "title": "Devastator 12 Shotgun (REWORK)",
+          "start": "3.4.2017",
+          "end": "9.6.2017"
+        }
+      ]
+    ]
+  }
+]
