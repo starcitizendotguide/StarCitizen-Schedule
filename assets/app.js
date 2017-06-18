@@ -3,7 +3,7 @@ var CONTENT_SYSTEM_ENABLED = true /*!(getUrlParameter('content_system') === unde
 var CRITICAL_PATH_ENABLED = !(getUrlParameter('critical_path') === undefined);
 
 //--- Some Methods
-function convertToDate(date, start) {
+function convertToDate(date, start, part) {
     var dateParts = date.match(/(\d+)\.(\d+)\.(\d+)/);
     return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), (start ? 0 : 23), (start ? 0 : 59), (start ? 0 : 59), (start ? 0 : 999)).getTime();
 }
