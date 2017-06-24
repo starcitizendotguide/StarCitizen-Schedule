@@ -1,9 +1,9 @@
 ﻿[
   {
     "title": "__DATA__",
-    "public": "27.7.2017",
-    "ptu": "20.7.2017",
-    "evocati": "5.7.2017"
+    "public": "10.8.2017",
+    "ptu": "3.8.2017",
+    "evocati": "20.7.2017"
   },
   {
     "title": "Persistent Universe Content",
@@ -123,7 +123,7 @@
         {
           "title": "Inventory System Gamecode Engineering (Support)",
           "start": "10.5.2017",
-          "end": "16.6.2017"
+          "end": "3.7.2017"
         }
       ],
       [
@@ -135,7 +135,7 @@
         {
           "title": "Cargo Gamecode Engineering",
           "start": "27.4.2017",
-          "end": "19.6.2017"
+          "end": "26.6.2017"
         }
       ],
       [
@@ -185,7 +185,7 @@
         {
           "title": "Doors & Airlocks",
           "start": "3.4.2017",
-          "end": "22.6.2017"
+          "end": "30.6.2017"
         }
       ],
       [
@@ -199,21 +199,21 @@
         {
           "title": "Item 2.0 Ship Conversion - Part 2",
           "start": "29.5.2017",
-          "end": "23.6.2017"
+          "end": "30.6.2017"
         }
       ],
       [
         {
           "title": "Kiosk Gamecode Engineering",
           "start": "5.4.2017",
-          "end": "23.6.2017"
+          "end": "26.6.2017"
         }
       ],
       [
         {
           "title": "Insurance",
           "start": "24.4.2017",
-          "end": "23.6.2017"
+          "end": "26.6.2017"
         }
       ],
       [
@@ -253,7 +253,7 @@
         {
           "title": "Entity Owner Manager",
           "start": "6.4.2017",
-          "end": "23.6.2017",
+          "end": "28.6.2017",
           "detailID": "entity-owner-manager"
         }
       ]
@@ -271,26 +271,26 @@
         {
           "title": "Vehicle Customiser App",
           "start": "24.5.2017",
-          "end": "6.7.2017"
+          "end": "13.7.2017"
         }
       ],
       [
         {
           "title": "StarMap App",
           "start": "3.4.2017",
-          "end": "26.6.2017"
+          "end": "29.6.2017"
         },
         {
           "title": "Inventory System UI",
           "start": "3.4.2017",
-          "end": "19.6.2017"
+          "end": "3.7.2017"
         }
       ],
       [
         {
           "title": "Item 2.0 UI",
           "start": "3.4.2017",
-          "end": "27.6.2017"
+          "end": "29.6.2017"
         }
       ],
       [
@@ -307,14 +307,14 @@
         {
           "title": "Comms System UI",
           "start": "19.6.2017",
-          "end": "30.6.2017"
+          "end": "10.7.2017"
         }
       ],
       [
         {
           "title": "Character Customization",
           "start": "2.5.2017",
-          "end": "4.7.2017"
+          "end": "17.7.2017"
         }
       ],
       [
@@ -333,7 +333,7 @@
         {
           "title": "Cargo Manifest App",
           "start": "19.5.2017",
-          "end": "19.6.2017"
+          "end": "3.7.2017"
         }
       ],
       [
@@ -354,7 +354,7 @@
         {
           "title": "Ship Selector App",
           "start": "24.5.2017",
-          "end": "3.7.2017"
+          "end": "5.7.2017"
         }
       ],
       [
@@ -414,7 +414,7 @@
         {
           "title": "Engine Trails & Contrails",
           "start": "3.4.2017",
-          "end": "23.6.2017"
+          "end": "27.6.2017"
         }
       ],
       [
@@ -433,7 +433,7 @@
         {
           "title": "Exposure Improvements",
           "start": "20.6.2017",
-          "end": "30.6.2017"
+          "end": "23.6.2017"
         }
       ],
       [
@@ -445,7 +445,7 @@
         {
           "title": "Asteroid Physics",
           "start": "13.6.2017",
-          "end": "23.6.2017"
+          "end": "28.6.2017"
         }
       ]
     ]
@@ -493,7 +493,7 @@
         {
           "title": "Physics Serialization",
           "start": "18.4.2017",
-          "end": "20.6.2017"
+          "end": "30.6.2017"
         }
       ],
       [
