@@ -34,14 +34,14 @@
         {
           "title": "Surface Outposts Lighting",
           "start": "29.5.2017",
-          "end": "26.6.2017"
+          "end": "30.6.2017"
         }
       ],
       [
         {
           "title": "Mission Givers",
           "start": "17.4.2017",
-          "end": "30.6.2017",
+          "end": "14.7.2017",
           "detailID": "mission-givers" 
         }
       ],
@@ -116,7 +116,7 @@
         {
           "title": "Hint System",
           "start": "9.5.2017",
-          "end": "30.6.2017"
+          "end": "5.7.2017"
         }
       ],
       [
@@ -159,7 +159,7 @@
         {
           "title": "Rover and Dragonfly in Ships",
           "start": "1.5.2017",
-          "end": "27.6.2017"
+          "end": "12.7.2017"
         }
       ],
       [
@@ -185,7 +185,7 @@
         {
           "title": "Doors & Airlocks",
           "start": "3.4.2017",
-          "end": "30.6.2017"
+          "end": "5.7.2017"
         }
       ],
       [
@@ -199,7 +199,7 @@
         {
           "title": "Item 2.0 Ship Conversion - Part 2",
           "start": "29.5.2017",
-          "end": "30.6.2017"
+          "end": "3.7.2017"
         }
       ],
       [
@@ -246,14 +246,14 @@
         {
           "title": "Entity Update Component Scheduler",
           "start": "3.4.2017",
-          "end": "30.6.2017"
+          "end": "7.7.2017"
         }
       ],
       [
         {
           "title": "Entity Owner Manager",
           "start": "6.4.2017",
-          "end": "28.6.2017",
+          "end": "7.7.2017",
           "detailID": "entity-owner-manager"
         }
       ]
@@ -271,26 +271,26 @@
         {
           "title": "Vehicle Customiser App",
           "start": "24.5.2017",
-          "end": "13.7.2017"
+          "end": "27.7.2017"
         }
       ],
       [
         {
           "title": "StarMap App",
           "start": "3.4.2017",
-          "end": "29.6.2017"
+          "end": "7.7.2017"
         },
         {
           "title": "Inventory System UI",
           "start": "3.4.2017",
-          "end": "3.7.2017"
+          "end": "7.7.2017"
         }
       ],
       [
         {
           "title": "Item 2.0 UI",
           "start": "3.4.2017",
-          "end": "29.6.2017"
+          "end": "7.7.2017"
         }
       ],
       [
@@ -307,14 +307,14 @@
         {
           "title": "Comms System UI",
           "start": "19.6.2017",
-          "end": "11.7.2017"
+          "end": "18.7.2017"
         }
       ],
       [
         {
           "title": "Character Customization",
           "start": "2.5.2017",
-          "end": "17.7.2017"
+          "end": "25.7.2017"
         }
       ],
       [
@@ -326,14 +326,14 @@
         {
           "title": "Personal Manager App",
           "start": "25.4.2017",
-          "end": "27.6.2017"
+          "end": "3.7.2017"
         }
       ],
       [
         {
           "title": "Cargo Manifest App",
           "start": "19.5.2017",
-          "end": "3.7.2017"
+          "end": "7.7.2017"
         }
       ],
       [
@@ -354,7 +354,7 @@
         {
           "title": "Ship Selector App",
           "start": "24.5.2017",
-          "end": "5.7.2017"
+          "end": "19.7.2017"
         }
       ],
       [
@@ -380,7 +380,7 @@
         {
           "title": "Mission System AI",
           "start": "3.4.2017",
-          "end": "30.6.2017"
+          "end": "19.7.2017"
         }
       ],
       [
@@ -445,7 +445,7 @@
         {
           "title": "Asteroid Physics",
           "start": "13.6.2017",
-          "end": "28.6.2017"
+          "end": "30.6.2017"
         }
       ]
     ]
@@ -465,7 +465,7 @@
         {
           "title": "Solar System Mission Service",
           "start": "17.4.2017",
-          "end": "28.6.2017",
+          "end": "30.6.2017",
           "detailID": "solar-system-mission-service-3-0"
         }
       ],
@@ -493,7 +493,7 @@
         {
           "title": "Physics Serialization",
           "start": "18.4.2017",
-          "end": "30.6.2017"
+          "end": "3.7.2017"
         }
       ],
       [
