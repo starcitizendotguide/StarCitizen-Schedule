@@ -1,9 +1,9 @@
 ﻿[
   {
     "title": "__DATA__",
-    "public": "25.8.2017",
-    "ptu": "18.8.2017",
-    "evocati": "3.8.2017"
+    "public": "8.9.2017",
+    "ptu": "31.8.2017",
+    "evocati": "17.8.2017"
   },
   {
     "title": "Persistent Universe Content",
@@ -41,7 +41,7 @@
         {
           "title": "Mission Givers",
           "start": "17.4.2017",
-          "end": "14.7.2017",
+          "end": "11.8.2017",
           "detailID": "mission-givers" 
         }
       ],
@@ -65,7 +65,7 @@
         {
           "title": "Delamar/Levski - Stretch Goal",
           "start": "3.4.2017",
-          "end": "14.7.2017",
+          "end": "28.7.2017",
           "detailID": "environments-delmar-levski"
         }
       ]        
@@ -123,7 +123,7 @@
         {
           "title": "Inventory System Gamecode Engineering (Support)",
           "start": "10.5.2017",
-          "end": "20.7.2017"
+          "end": "28.7.2017"
         }
       ],
       [
@@ -253,7 +253,7 @@
         {
           "title": "Entity Owner Manager",
           "start": "6.4.2017",
-          "end": "20.7.2017",
+          "end": "11.8.2017",
           "detailID": "entity-owner-manager"
         }
       ]
@@ -283,7 +283,7 @@
         {
           "title": "Inventory System UI",
           "start": "3.4.2017",
-          "end": "20.7.2017"
+          "end": "27.7.2017"
         }
       ],
       [
@@ -307,14 +307,14 @@
         {
           "title": "Comms System UI",
           "start": "19.6.2017",
-          "end": "25.7.2017"
+          "end": "16.8.2017"
         }
       ],
       [
         {
           "title": "Character Customization",
           "start": "2.5.2017",
-          "end": "25.7.2017"
+          "end": "9.8.2017"
         }
       ],
       [
@@ -333,7 +333,7 @@
         {
           "title": "Cargo Manifest App",
           "start": "19.5.2017",
-          "end": "10.7.2017"
+          "end": "27.7.2017"
         }
       ],
       [
@@ -354,7 +354,7 @@
         {
           "title": "Ship Selector App",
           "start": "24.5.2017",
-          "end": "19.7.2017"
+          "end": "3.8.2017"
         }
       ],
       [
@@ -380,7 +380,7 @@
         {
           "title": "Mission System AI",
           "start": "3.4.2017",
-          "end": "24.7.2017"
+          "end": "9.8.2017"
         }
       ],
       [
@@ -512,7 +512,7 @@
         {
           "title": "RSI Aurora",
           "start": "3.4.2017",
-          "end": "21.6.2017"
+          "end": "4.8.2017"
         }
       ],
       [
@@ -526,7 +526,7 @@
         {
           "title": "L86 Pistol (REWORK)",
           "start": "3.4.2017",
-          "end": "28.7.2017"
+          "end": "2.8.2017"
         }
       ],
       [
