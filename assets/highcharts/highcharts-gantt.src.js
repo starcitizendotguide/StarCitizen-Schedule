@@ -1,5 +1,5 @@
 /**
- * @license Highcharts JS vgantt (2017-06-02)
+ * @license Highcharts JS vgantt (2017-07-28)
  *
  * (c) 2017 Lars Cabrera, Torstein Honsi, Jon Arild Nygard & Oystein Moseng
  *
@@ -26451,9 +26451,10 @@ Pathfinder.prototype = {
 		// Init connection reference list
 		this.connections = [];
 
+        var self = this;
 		// Recalculate paths/obstacles on chart redraw
-		addEvent(chart, 'redraw', function () {
-			//this.pathfinder.update();
+        addEvent(chart, 'redraw', function () {
+            self.update();
 		});
 	},
 
@@ -27259,6 +27260,7 @@ seriesType('gantt', parentName, {
 		headerFormat:	'<span style="color:{point.color};text-align:right">' +
 							'{series.name}' +
 						'</span><br/>',
+		pointFormat: null,
 		pointFormatter: function () {
 			var point = this,
 				series = point.series,
@@ -27277,6 +27279,10 @@ seriesType('gantt', parentName, {
 				dateRowStart = '<span style="font-size: 0.8em">',
 				dateRowEnd = '</span><br/>',
 				retVal = '<b>' + taskName + '</b>';
+
+			if (ttOptions.pointFormat) {
+				return point.tooltipFormatter(ttOptions.pointFormat);
+			}
 
 			if (!format) {
 				ttOptions.dateTimeLabelFormat = format = tooltip.getDateFormat(
@@ -27469,8 +27475,7 @@ seriesType('gantt', parentName, {
 * License: www.highcharts.com/license
 */
 
-var defined = H.defined,
-	each = H.each,
+var each = H.each,
 	map = H.map,
 	merge = H.merge,
 	splat = H.splat,
@@ -27495,9 +27500,10 @@ H.GanttChart = H.ganttChart = function (renderTo, options, callback) {
 		defaultLinkedTo;
 	options = arguments[hasRenderToArg ? 1 : 0];
 
-	options.xAxis = splat(options.xAxis || {});
-	if (!defined(options.xAxis[1])) { // Include second xAxis by default
-		options.xAxis[1] = {};
+	// If user hasn't defined axes as array, make it into an array and add a
+	// second axis by default.
+	if (!H.isArray(options.xAxis)) {
+		options.xAxis = [options.xAxis || {}, {}];
 	}
 
 	// apply X axis options to both single and multi x axes
