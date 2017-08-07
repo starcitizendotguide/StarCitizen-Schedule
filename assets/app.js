@@ -118,22 +118,32 @@ $(document).ready(function () {
                 drawSchedule(index.files[0] /*TODO*/, diffMap, index.name, containerID, CRITICAL_PATH_ENABLED, (entries.schedules.length > 1));
             }
 
-
         });
 
-        //--- Hide & Seek
-        $('#containers > div').each(function () {
-            $(this).hide();
-        });
     });
 
+    
+    $('#containers > div').each(function () {
+        $(this).hide();    
+    });
 });
+
+/*
+function drawIssueChart(file, title, containerID) {
+
+    var xhr = $.ajax({
+        url: ('assets/data/')
+    });
+
+}
+*/
 
 function drawSchedule(file, diffMap, title, containerID, criticalPath, ignoreFirst) {
 
     var xhr = $.ajax({
         url: ('assets/data/schedules/' + file + "?" + new Date().getTime()),
         type: 'GET',
+        contentType: 'application/json',
         dataType: 'json',
         success: function (data) {
 
@@ -284,7 +294,7 @@ function drawSchedule(file, diffMap, title, containerID, criticalPath, ignoreFir
                 ]
             };
 
-            if (!(dataEntry === undefined)) {
+            if (!(dataEntry === undefined) && !(dataEntry === null)) {
                 if (!(dataEntry.evocati === undefined)) {
                     mainEntry.data.push({
                         parent: title,
@@ -492,7 +502,7 @@ $('#schedules').on('click', 'a', function () {
 
     var containerID = $(this).attr('id') + '-graph';
 
-    $('#containers > div').each(function () {
+    $('.containers > div').each(function () {
         $(this).hide();
     });
 
