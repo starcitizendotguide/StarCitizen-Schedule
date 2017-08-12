@@ -4,6 +4,12 @@ var CRITICAL_PATH_ENABLED = !(getUrlParameter('critical_path') === undefined);
 
 //--- Some Methods
 function convertToDate(date, start) {
+
+    if (date === 'TBD') {
+        var tmp = new Date();
+        date = (tmp.getDate() + '.' + (tmp.getMonth() + 1) + '.' + tmp.getFullYear());
+    } 
+
     var dateParts = date.match(/(\d+)\.(\d+)\.(\d+)/);
     return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), (start ? 0 : 23), (start ? 0 : 59), (start ? 0 : 59), (start ? 0 : 999)).getTime();
 }
@@ -222,7 +228,11 @@ function drawSchedule(file, diffMap, title, containerID, criticalPath, ignoreFir
                             parent: value.title,
                             dependency: dependencyId,
                             detailID: v.detailID,
-                            color: getColor(index)
+                            color: getColor(index),
+                            milestone: (v.start === 'TBD' && v.end === 'TBD'),
+                            IS_START_TBD: (v.start === 'TBD'),
+                            IS_END_TBD: (v.end === 'TBD'),
+                            IS_TBD: (v.start === 'TBD' && v.end === 'TBD')
                         });
 
                         if (!(v.detailID === undefined) && detailMap[v.detailID] === undefined) {
@@ -412,13 +422,14 @@ function drawSchedule(file, diffMap, title, containerID, criticalPath, ignoreFir
                     formatter: function () {
 
                         var point = this.point;
-                        var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + moment(point.start).format('MMMM Do, YYYY');
+
+                        var tooltipContent = '<div class="info-box-title"><b>' + this.key + '</b> | <i>' + (point.IS_START_TBD ? 'TBD' : moment(point.start).format('MMMM Do, YYYY'));
 
                         if (this.point.parent == title) {
                             return tooltipContent;
                         }
 
-                        tooltipContent += ' - ' + moment(point.end).format('MMMM Do, YYYY') + '</i></div>';
+                        tooltipContent += ' - ' + (point.IS_END_TBD ? 'TBD' : moment(point.end).format('MMMM Do, YYYY')) + '</i></div>';
 
                         if (!(point.detailID === undefined) && CONTENT_SYSTEM_ENABLED) {
 
