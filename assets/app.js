@@ -61,6 +61,7 @@ $(document).ready(function () {
     //--- Hide menue & disclaimer
     $('#schedules').hide();
     $('.disclaimer').hide();
+    $('.date-selector').hide();
 
     //--- Load all details
     $.getJSON('assets/data/details.json', { _: new Date().getTime() }, function (details) {
@@ -90,40 +91,30 @@ $(document).ready(function () {
 
             //--- Append menue & tab
             $('#schedules').append('<li><a href="#" id="' + contentID + '">' + index.name + '</a></li>');
-            $('.containers').append('<div class="container" id="' + containerID + '"></div>')
+            $('.containers').append('<div id="' + containerID + '"></div>')
 
             //--- Draw schedule
             if (k === entries.schedules.length - 1) {
                 //--- Loading done when we arrived at the last schedule
                 drawFirst = true;
-            }
+            }   
 
-            var diffMap = [];
+            var nowFile = index.files[0];
+            var diffFile = null;
 
-            //--- Populate diff map with prior version
             if (index.files.length > 1) {
-                $.getJSON('assets/data/schedules/' + index.files[1], function (data) {
-
-                    $.each(data, function (k, v) {
-                        $.each(v.children, function (ak, av) {
-                            $.each(av, function (bk, bv) {
-                                diffMap.push({
-                                    "category": v.title,
-                                    "title": bv.title,
-                                    "priorEnd": convertToDate(bv.end, false)
-                                });
-                            });
-                        });
-                    });
-
-                    drawSchedule(index.files[0] /*TODO*/, diffMap, index.name, containerID, CRITICAL_PATH_ENABLED, (entries.schedules.length > 1));
-                });
-            }
-            //--- If we don't have a prior schedule version then we also don't have to populate the diffMap
-            else {
-                drawSchedule(index.files[0] /*TODO*/, diffMap, index.name, containerID, CRITICAL_PATH_ENABLED, (entries.schedules.length > 1));
+                diffFile = index.files[1];
             }
 
+            prepareSchedule(index.name, containerID, nowFile, diffFile, (entries.schedules.length > 1));
+
+            var labels = [];
+            //--- Prepare Date Slider
+            $.each(index.files, function (k, index) {
+                labels.push(index.date);
+            });
+            labels = labels.reverse();
+            drawScheduleSlider(index, containerID, labels);
         });
 
     });
@@ -134,27 +125,68 @@ $(document).ready(function () {
     });
 });
 
-/*
-function drawIssueChart(file, title, containerID) {
+function drawScheduleSlider(index, containerID, labels) {
 
-    var xhr = $.ajax({
-        url: ('assets/data/')
-    });
+    $("#date-selector")
+        .slider({
+            min: 0,
+            max: labels.length - 1,
+            value: labels.length - 1
+        })
+        .slider("pips", {
+            rest: "label",
+            labels: labels
+        })
+        .on("slidechange", function (e, ui) {
+            console.log(this);
+            var fileIndex = (index.files.length - 1 - ui.value);
+
+            var diffFile = (index.files[fileIndex + 1] === undefined ? null : index.files[fileIndex + 1]);
+            prepareSchedule(index.name, containerID, index.files[fileIndex], diffFile, true);
+        });
 
 }
-*/
 
-function drawSchedule(file, diffMap, title, containerID, criticalPath, ignoreFirst) {
+function prepareSchedule(name, containerID, nowFile, diffFile, ignoreFirst) {
+    var diffMap = [];
+
+    //--- Populate diff map with prior version
+    if (!(diffFile === null)) {
+        $.getJSON('assets/data/schedules/' + diffFile.file, function (data) {
+
+            $.each(data, function (k, v) {
+                $.each(v.children, function (ak, av) {
+                    $.each(av, function (bk, bv) {
+                        diffMap.push({
+                            "category": v.title,
+                            "title": bv.title,
+                            "priorEnd": convertToDate(bv.end, false)
+                        });
+                    });
+                });
+            });
+
+            drawSchedule(nowFile.file, nowFile.date, diffMap, name, containerID, CRITICAL_PATH_ENABLED, ignoreFirst);
+        });
+    }
+    //--- If we don't have a prior schedule version then we also don't have to populate the diffMap
+    else {
+        drawSchedule(nowFile.file, nowFile.date, diffMap, name, containerID, CRITICAL_PATH_ENABLED, ignoreFirst);
+    }
+
+}
+
+function drawSchedule(file, date, diffMap, title, containerID, criticalPath, ignoreFirst) {
 
     var xhr = $.ajax({
         url: ('assets/data/schedules/' + file + "?" + new Date().getTime()),
         type: 'GET',
         contentType: 'application/json',
+        mimeType: "application/json",
         dataType: 'json',
         success: function (data) {
 
-            //--- Update title
-            title += ' (Updated: ' + xhr.getResponseHeader("Last-Modified") + ')'
+            title += ' (Updated: ' + date + ')'
 
             //---
             //--- Array to store the data
@@ -370,6 +402,7 @@ function drawSchedule(file, diffMap, title, containerID, criticalPath, ignoreFir
                                 $('#schedules').fadeIn('slow');
                                 $('#' + firstGraphToDraw).fadeIn('slow');
                                 $('.disclaimer').fadeIn('slow');
+                                $('.date-selector').fadeIn('slow');
                                 drawFirst = false;
                             }
                         }
@@ -517,6 +550,7 @@ $('#schedules').on('click', 'a', function () {
         $(this).hide();
     });
 
+    $('.date-selector').fadeIn('slow');
     $('#' + containerID).fadeIn('slow');
 
 });

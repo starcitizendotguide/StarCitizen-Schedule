@@ -29,7 +29,8 @@ hr {
 }
 
 .containers {
-    max-width: 99%;
+    max-width: 98%;
+    margin-left: 0.5%;
 }
 
 .containers .container {
@@ -114,6 +115,7 @@ hr {
 /* MENUE */
 nav {
     float: left;
+    margin-bottom: 1%;
 }
 
 nav ul {
@@ -151,4 +153,45 @@ nav ul li a {
 /* PROGRESSBAR */
 .highcharts-point .highcharts-partfill-overlay {
     fill: #1acf00;
+}
+
+.date-selector {
+    position: absolute;
+    width: 90%;
+    margin: 2% 3.5%;
+}
+
+@media all and (max-width: 1280px) {
+    .date-selector {
+        display: none !important;
+    }
+}
+
+.ui-slider-pips .ui-slider-pip {
+    width: 1em;
+    height: 1em;
+    line-height: 1em;
+    font-size: .8em;
+    text-align: center;
+    cursor: pointer;
+    position: absolute;
+    color: #999;
+}
+
+.ui-slider-pips:not(.ui-slider-disabled) .ui-slider-pip:hover .ui-slider-label {
+    color: #FF7A00;
+    font-weight: 700
+}
+
+.ui-slider-pip.ui-slider-pip-selected-initial {
+    font-weight: normal;
+}
+
+.ui-slider-pip.ui-slider-pip-selected {
+    font-weight: bold;
+}
+
+.ui-slider-pip.ui-slider-pip-selected,
+.ui-slider-pip.ui-slider-pip-selected-initial {
+    color: #3FC9E1;
 }

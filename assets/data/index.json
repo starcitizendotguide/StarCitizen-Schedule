@@ -3,24 +3,86 @@
     {
       "name": "3.0 Schedule",
       "files": [
-        "3.0-schedule-17.json",
-        "3.0-schedule-16.json",
-        "3.0-schedule-15.json",
-        "3.0-schedule-14.json",
-        "3.0-schedule-13.json",
-        "3.0-schedule-12.json",
-        "3.0-schedule-11.json",
-        "3.0-schedule-10.json",
-        "3.0-schedule-9.json",
-        "3.0-schedule-8.json",
-        "3.0-schedule-7.json",
-        "3.0-schedule-6.json",
-        "3.0-schedule-5.json",
-        "3.0-schedule-4.json",
-        "3.0-schedule-3.json",
-        "3.0-schedule-2.json",
-        "3.0-schedule-1.json",
-        "3.0-schedule.json"
+        {
+          "file": "3.0-schedule-18.json",
+          "date": "18.8.2017"
+        },
+        {
+          "file": "3.0-schedule-17.json",
+          "date": "11.8.2017"
+        },
+        {
+          "file": "3.0-schedule-16.json",
+          "date": "4.8.2017"
+        },
+        {
+          "file": "3.0-schedule-15.json",
+          "date": "28.7.2017"
+        },
+        {
+          "file": "3.0-schedule-14.json",
+          "date": "21.7.2017"
+        },
+        {
+          "file": "3.0-schedule-13.json",
+          "date": "14.7.2017"
+        },
+        {
+          "file": "3.0-schedule-12.json",
+          "date": "7.7.2017"
+        },
+        {
+          "file": "3.0-schedule-11.json",
+          "date": "30.6.2017"
+        },
+        {
+          "file": "3.0-schedule-10.json",
+          "date": "23.6.2017"
+        },
+        {
+          "file": "3.0-schedule-9.json",
+          "date": "16.6.2017"
+        },
+        {
+          "file": "3.0-schedule-8.json",
+          "date": "9.6.2017"
+        },
+        {
+          "file": "3.0-schedule-7.json",
+          "date": "2.6.2017"
+        },
+        {
+          "file": "3.0-schedule-6.json",
+          "date": "26.5.2017"
+        },
+        {
+          "file": "3.0-schedule-5.json",
+          "date": "19.5.2017"
+        },
+        {
+          "file": "3.0-schedule-5.json",
+          "date": "12.5.2017"
+        },
+        {
+          "file": "3.0-schedule-4.json",
+          "date": "28.4.2017"
+        },
+        {
+          "file": "3.0-schedule-3.json",
+          "date": "21.4.2017"
+        },
+        {
+          "file": "3.0-schedule-2.json",
+          "date": "14.8.2017"
+        },
+        {
+          "file": "3.0-schedule-1.json",
+          "date": "7.4.2017"
+        },
+        {
+          "file": "3.0-schedule-0.json",
+          "date": "31.3.2017"
+        }
       ]
     }
   ],

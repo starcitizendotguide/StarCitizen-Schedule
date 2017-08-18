@@ -16,6 +16,8 @@
         ga('create', 'UA-100758095-1', 'auto');
         ga('send', 'pageview');
     </script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <div id="loading">
@@ -28,17 +30,23 @@
             <div class="rect5"></div>
         </div>
     </div>
-    <div class="grid">
-        <nav>
-            <ul id="schedules"></ul>
-        </nav>
-        <div class="containers"></div>
-        <p class="disclaimer">This website is not affiliated with robertsspaceindustries.com and/or cloudimperiumgames.com. - I am a private person and 
-        backer of this project without any affilation to the companies producing the game.</p>
+    <nav>
+        <ul id="schedules"></ul>
+        <div class="date-selector"><div id="date-selector"></div></div>
+    </nav>
+    <div>
+        <div class="grid">
+            <div class="containers"></div>
+            <p class="disclaimer">
+                This website is not affiliated with robertsspaceindustries.com and/or cloudimperiumgames.com. - I am a private person and
+                backer of this project without any affilation to the companies producing the game.
+            </p>
+        </div>
     </div>
 
     <script src="assets/jquery.min.js" charset="utf-8"></script>
     <script src="assets/moment.js" charset="utf-8"></script>
+    <script src="assets/pips.js" charset="utf-8"></script>
     <script src="assets/highcharts/highcharts-gantt.src.js" charset="utf-8"></script>
     <script src="assets/highcharts/exporting.js" charset="utf-8"></script>
     <script src="assets/app.js" charset="utf-8"></script>
