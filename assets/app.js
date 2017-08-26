@@ -8,10 +8,11 @@ function convertToDate(date, start) {
     if (date === 'TBD') {
         var tmp = new Date();
         date = (tmp.getDate() + '.' + (tmp.getMonth() + 1) + '.' + tmp.getFullYear());
-    } 
+    }
 
     var dateParts = date.match(/(\d+)\.(\d+)\.(\d+)/);
     return new Date(parseInt(dateParts[3]), parseInt(dateParts[2]) - 1, parseInt(dateParts[1]), (start ? 0 : 23), (start ? 0 : 59), (start ? 0 : 59), (start ? 0 : 999)).getTime();
+
 }
 
 function convertContentToContainer(containerID) {
@@ -55,6 +56,9 @@ var detailMap = [];
 //--- Color array
 var legendColors = [];
 
+//--- Schedule Slider Map
+var scheduleSliderMap = [];
+
 //--- Draw Schedules
 $(document).ready(function () {
 
@@ -76,13 +80,12 @@ $(document).ready(function () {
 
     //--- Load & Draw All Schedules
     $.getJSON('assets/data/index.json', { _: new Date().getTime() }, function (entries) {
-        
+
         //--- Colors
         $.each(entries.legend, function (k, color) { legendColors.push(color); });
 
         //--- Schedules
         $.each(entries.schedules, function (k, index) {
-
             //--- Create content id
             var contentID = convertContentToContainer(index.name);
             var containerID = contentID + '-graph';
@@ -97,9 +100,10 @@ $(document).ready(function () {
             if (k === entries.schedules.length - 1) {
                 //--- Loading done when we arrived at the last schedule
                 drawFirst = true;
-            }   
+            }
 
             var nowFile = index.files[0];
+            console.log(index.files[0]);
             var diffFile = null;
 
             if (index.files.length > 1) {
@@ -108,50 +112,65 @@ $(document).ready(function () {
 
             prepareSchedule(index.name, containerID, nowFile, diffFile, (entries.schedules.length > 1));
 
-            var labels = [];
-            //--- Prepare Date Slider
-            $.each(index.files, function (k, index) {
-                labels.push(index.date);
-            });
-            labels = labels.reverse();
-            drawScheduleSlider(index, containerID, labels);
+            if (k === 0) {
+                var labels = [];
+                //--- Prepare Date Slider
+                $.each(index.files, function (k, index) {
+                    labels.push(index.date);
+                });
+                labels = labels.reverse();
+                drawScheduleSlider(index, containerID, labels, false);
+            }
         });
 
     });
 
-    
+
     $('#containers > div').each(function () {
-        $(this).hide();    
+        $(this).hide();
     });
 });
 
-function drawScheduleSlider(index, containerID, labels) {
+function drawScheduleSlider(index, containerID, labels, draw) {
 
-    $("#date-selector")
-        .slider({
-            min: 0,
-            max: labels.length - 1,
-            value: labels.length - 1
-        })
-        .slider("pips", {
-            rest: "label",
+    if (index == null && labels == null) {
+        var entry = scheduleSliderMap[containerID];
+        index = entry.index;
+        labels = entry.labels;
+    }
+
+    if (typeof scheduleSliderMap[containerID] === 'undefined') {
+        scheduleSliderMap[containerID] = {
+            index: index,
             labels: labels
-        })
-        .on("slidechange", function (e, ui) {
-            console.log(this);
-            var fileIndex = (index.files.length - 1 - ui.value);
+        };
+    }
 
-            var diffFile = (index.files[fileIndex + 1] === undefined ? null : index.files[fileIndex + 1]);
-            prepareSchedule(index.name, containerID, index.files[fileIndex], diffFile, true);
-        });
+    if (draw) {
+        $("#date-selector")
+            .slider({
+                min: 0,
+                max: labels.length - 1,
+                value: labels.length - 1
+            })
+            .slider("pips", {
+                rest: "label",
+                labels: labels
+            })
+            .on("slidechange", function (e, ui) {
+                var fileIndex = (index.files.length - 1 - ui.value);
 
+                var diffFile = (index.files[fileIndex + 1] === undefined ? null : index.files[fileIndex + 1]);
+                prepareSchedule(index.name, containerID, index.files[fileIndex], diffFile, true);
+            });
+    }
 }
 
 function prepareSchedule(name, containerID, nowFile, diffFile, ignoreFirst) {
     var diffMap = [];
 
     //--- Populate diff map with prior version
-    if (!(diffFile === null)) {
+    if (!(diffFile == null)) {
         $.getJSON('assets/data/schedules/' + diffFile.file, function (data) {
 
             $.each(data, function (k, v) {
@@ -170,7 +189,8 @@ function prepareSchedule(name, containerID, nowFile, diffFile, ignoreFirst) {
         });
     }
     //--- If we don't have a prior schedule version then we also don't have to populate the diffMap
-    else {
+    else if(!(nowFile == null)) {
+        //@TODO Why is the "nowFile" null?
         drawSchedule(nowFile.file, nowFile.date, diffMap, name, containerID, CRITICAL_PATH_ENABLED, ignoreFirst);
     }
 
@@ -235,7 +255,6 @@ function drawSchedule(file, date, diffMap, title, containerID, criticalPath, ign
                 $.each(value.children, function (k, v) {
                     var dependencyId = null;
                     $.each(v, function (k, v) {
-
                         //--- Converting start & end point to Date
                         var s = convertToDate(v.start, true), e = convertToDate(v.end, false);
 
@@ -341,7 +360,7 @@ function drawSchedule(file, date, diffMap, title, containerID, criticalPath, ign
                     mainEntry.data.push({
                         parent: title,
                         taskName: 'Evocati - Release Date',
-                        start: convertToDate(dataEntry.evocati, true),
+                        start: convertToDate( dataEntry.evocati, true),
                         parent: title,
                         milestone: true
                     });
@@ -403,6 +422,9 @@ function drawSchedule(file, date, diffMap, title, containerID, criticalPath, ign
                                 $('#' + firstGraphToDraw).fadeIn('slow');
                                 $('.disclaimer').fadeIn('slow');
                                 $('.date-selector').fadeIn('slow');
+
+
+                                drawScheduleSlider(null, containerID, null, true);
                                 drawFirst = false;
                             }
                         }
@@ -552,5 +574,7 @@ $('#schedules').on('click', 'a', function () {
 
     $('.date-selector').fadeIn('slow');
     $('#' + containerID).fadeIn('slow');
+
+    drawScheduleSlider(null, containerID, null, true);
 
 });
