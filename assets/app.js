@@ -452,7 +452,7 @@ function drawSchedule(file, date, diffMap, title, containerID, criticalPath, ign
                             color: fontColor
                         },
                         formatter: function () {
-                            if (highlights.includes(this.value)) {
+                            if (highlights.indexOf(this.value) !== -1) {
                                 return '<b>' + this.value + '</b>';
                             }
                             return this.value;
