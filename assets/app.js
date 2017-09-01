@@ -103,7 +103,6 @@ $(document).ready(function () {
             }
 
             var nowFile = index.files[0];
-            console.log(index.files[0]);
             var diffFile = null;
 
             if (index.files.length > 1) {
