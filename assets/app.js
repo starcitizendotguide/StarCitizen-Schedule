@@ -178,7 +178,10 @@ function prepareSchedule(name, containerID, nowFile, diffFile, ignoreFirst) {
                         diffMap.push({
                             "category": v.title,
                             "title": bv.title,
-                            "priorEnd": convertToDate(bv.end, false)
+                            "priorEnd": convertToDate(bv.end, false),
+                            IS_TBD: (bv.start === 'TBD' && bv.end === 'TBD'),
+                            IS_END_TBD: (bv.end === 'TBD'),
+                            IS_START_TBD: (bv.start === 'TBD'),
                         });
                     });
                 });
@@ -517,16 +520,19 @@ function drawSchedule(file, date, diffMap, title, containerID, criticalPath, ign
                                     if (!(point.detailID === undefined)) {
                                         tooltipContent += '<hr />';
                                     }
-
                                     if (delta === 0) {
                                         tooltipContent += ('The ETA did not change since the last schedule report.');
                                     } else if (point.options.IS_END_TBD) {
                                         tooltipContent += ('<font color="red">ETA was ' + moment(value.priorEnd).format('MMMM Do, YYYY') + ': <b> is now <i>TBD</i></b>.</font>');
                                     } else if (delta < 0) {
                                         tooltipContent += ('<font color="red">ETA was ' + moment(value.priorEnd).format('MMMM Do, YYYY') + ': <b>' + (delta * -1) + ' days delayed</b>.</font>');
-                                    } else if (delta > 0) {
+                                    } else if (delta > 0 && value.IS_END_TBD === false) {
                                         tooltipContent += ('<font color="green">ETA was ' + moment(value.priorEnd).format('MMMM Do, YYYY') + ': <b>' + delta + ' days earlier</b>.</font>');
+                                    } else if (delta > 0 && value.IS_END_TBD === true) {
+                                        tooltipContent += ('<font color="green">ETA was <i>TBD</i> but the task was finished earlier than anticipated.</font>');
                                     }
+                                    console.log(value);
+
                                     return false;
                                 }
                             });
